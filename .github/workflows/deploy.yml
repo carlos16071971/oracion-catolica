@@ -16,6 +16,8 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,7 +25,8 @@ jobs:
           node-version: 22
       - name: Verificar oraciones, fechas y horarios
         run: node scripts/verificar.mjs
-      - name: Publicar en Cloudflare Pages
+      - name: Publicar en Cloudflare Pages (solo si hay secretos; si conectaste Git en Cloudflare no hace falta)
+        if: ${{ env.CF_TOKEN != '' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
