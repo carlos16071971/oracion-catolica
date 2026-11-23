@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
 <title>Oración Católica</title>
 <meta name="description" content="Una oración y una reflexión para cada amanecer y cada noche, todo el año.">
 <meta name="theme-color" content="#3b1c7a">
@@ -12,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Oración">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-periodo="manana">
@@ -65,7 +66,18 @@
     <h1 id="bienTitulo"></h1>
     <p class="bien-frase" id="bienFrase"></p>
     <button id="btnEntrar" class="entrar" type="button">Entrar<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <div class="instalar" id="instalar" hidden>
+      <span id="instalarTxt"></span>
+      <button id="btnInstalar" type="button" hidden>Instalar app</button>
+    </div>
+    <small class="bien-version" id="bienVersion"></small>
   </div>
+</div>
+
+<!-- Aviso de actualización -->
+<div id="toast" class="toast" role="status" aria-live="polite" hidden>
+  <div class="toast-txt"><b id="toastTit"></b><span id="toastMsg"></span></div>
+  <button id="toastBtn" type="button"></button>
 </div>
 
 <!-- Despedida al salir -->

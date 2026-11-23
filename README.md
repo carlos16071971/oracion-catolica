@@ -38,7 +38,21 @@ npm run verificar      # comprueba 366 días sin repetir, celebraciones y horari
 
 Simular fecha y hora: `http://localhost:8787/?fecha=2026-12-25&hora=21:00`
 
-## Publicar (automático, sin escribir comandos)
+## Publicar desde el celular (sin comandos)
+
+El código se sube a GitHub desde Claude. Tú solo conectas Cloudflare **una vez**:
+
+1. Entra a **dash.cloudflare.com** desde el celular e inicia sesión (o crea la cuenta gratis).
+2. Menú ☰ → **Workers y Pages** → **Crear** → pestaña **Pages** → **Conectar con Git**.
+3. Autoriza GitHub y elige el repositorio **oracion-catolica**.
+4. Configura: *Nombre del proyecto* `oracion-catolica` · *Rama de producción* `main` · *Ajuste preestablecido* **Ninguno** · *Comando de compilación* (vacío) · *Directorio de salida* `public`.
+5. Toca **Guardar e implementar**. En 1–2 minutos queda en `https://oracion-catolica.pages.dev`.
+
+Desde entonces, cada actualización que se suba a GitHub se publica sola. La app muestra a los usuarios un aviso con la versión y el mensaje del cambio (`public/version.json`, historial en `CHANGELOG.md`).
+
+**Instalar en el teléfono:** iPhone → Safari → Compartir → *Añadir a pantalla de inicio*. Android → Chrome → menú ⋮ → *Instalar aplicación*.
+
+## Publicar desde un computador (automático, sin escribir comandos)
 
 Haz **doble clic en `PUBLICAR.bat`** (Windows) o `PUBLICAR.command` (Mac/Linux). Requiere tener instalados [Node.js](https://nodejs.org) y [GitHub CLI](https://cli.github.com).
 

@@ -20,7 +20,8 @@ body[data-periodo="noche"] {
 }
 
 * { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; }
+html, body { height: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+button { touch-action: manipulation; font-family: inherit; }
 body {
   font-family: var(--sans); color: var(--texto-claro); background: #1a1040;
   overflow: hidden; overscroll-behavior: none;
@@ -48,7 +49,7 @@ body {
 .fecha strong { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; text-shadow: 0 1px 8px rgba(0,0,0,.25); }
 
 .salir {
-  flex: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45);
+  flex: none; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45);
   display: grid; place-items: center; color: #fff; cursor: pointer;
   background: linear-gradient(145deg, rgba(255,255,255,.34), rgba(255,255,255,.1));
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -101,7 +102,7 @@ h1, h2 { font-family: var(--serif); line-height: 1.15; }
 .oracion h1 { font-size: clamp(1.25rem, 3.4vh, 1.7rem); margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,.55); }
 .reflexion h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .16em; color: var(--refl-acento); margin-bottom: 6px; font-family: var(--sans); font-weight: 800; }
 
-.texto { overflow-y: auto; min-height: 0; padding-right: 4px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.4) transparent; -webkit-overflow-scrolling: touch; }
+.texto { overscroll-behavior: contain; overflow-y: auto; min-height: 0; padding-right: 4px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.4) transparent; -webkit-overflow-scrolling: touch; }
 .oracion .texto { font-family: var(--serif); font-size: clamp(.9rem, 2vh, 1.04rem); line-height: 1.48; text-shadow: 0 1px 8px rgba(0,0,0,.6); max-height: 100%; }
 .oracion .texto p + p { margin-top: .55em; }
 .oracion .texto p:last-child { color: var(--oro); font-weight: 700; font-style: italic; }
@@ -148,8 +149,36 @@ h1, h2 { font-family: var(--serif); line-height: 1.15; }
   .oracion h1 { font-size: 2rem; }
   .oracion .texto, .reflexion .texto { font-size: 1.1rem; }
 }
+/* Celular en horizontal: dos columnas */
+@media (orientation: landscape) and (max-height: 520px) {
+  #app { max-width: 100%; display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: auto 1fr; column-gap: 12px; row-gap: 6px; padding: max(6px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+  .top, .aviso { grid-column: 1 / -1; }
+  .aviso { display: none; }
+  .tarjeta.oracion, .tarjeta.reflexion { flex: none; }
+  .fecha strong { font-size: 1rem; }
+  .salir { width: 42px; height: 42px; }
+  .bien-cuerpo { padding-bottom: 14px; gap: 6px; }
+  .bienvenida h1 { font-size: 1.5rem; }
+  .bien-frase { display: none; }
+}
 @media (max-height: 640px) { .chips { display: none; } .oracion h1 { font-size: 1.1rem; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- Instalar y avisos de actualización ---------- */
+.instalar { margin-top: 4px; font-size: .8rem; line-height: 1.4; max-width: 32ch; opacity: .92; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+.instalar button { margin-top: 6px; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.6); background: rgba(255,255,255,.15); color: #fff; font-weight: 700; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.bien-version { font-size: .7rem; opacity: .6; letter-spacing: .08em; }
+.toast {
+  position: fixed; z-index: 40; left: 50%; transform: translateX(-50%);
+  top: max(10px, env(safe-area-inset-top)); width: min(94vw, 480px);
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 20px;
+  background: linear-gradient(135deg, #2b1b6b, #5b2bb0); color: #fff; border: 1px solid rgba(255,255,255,.35);
+  box-shadow: 0 14px 40px rgba(0,0,0,.45); animation: baja .5s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes baja { from { opacity: 0; transform: translate(-50%, -20px); } }
+.toast-txt { flex: 1; display: flex; flex-direction: column; gap: 2px; font-size: .85rem; line-height: 1.35; min-width: 0; }
+.toast-txt b { color: var(--oro); font-size: .95rem; }
+.toast button { flex: none; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; font-weight: 800; color: #3a1b00; background: linear-gradient(135deg, #ffe27a, #ffa53a); }

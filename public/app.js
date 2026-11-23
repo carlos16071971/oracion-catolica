@@ -115,3 +115,60 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && !$
 if ("serviceWorker" in navigator && location.protocol.startsWith("http") && !FIJA) {
   navigator.serviceWorker.register("sw.js").catch(() => {});
 }
+
+// ---- Versión y avisos de actualización ----
+const LS = {
+  get: (k) => { try { return localStorage.getItem(k); } catch (_) { return null; } },
+  set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} }
+};
+let versionActual = null;
+async function leerVersion() {
+  try {
+    const r = await fetch("version.json?t=" + Date.now(), { cache: "no-store" });
+    return r.ok ? await r.json() : null;
+  } catch (_) { return null; }
+}
+function toast(titulo, mensaje, boton, accion) {
+  $("toastTit").textContent = titulo;
+  $("toastMsg").textContent = mensaje;
+  $("toastBtn").textContent = boton;
+  $("toastBtn").onclick = () => { $("toast").hidden = true; accion && accion(); };
+  $("toast").hidden = false;
+}
+const fmtVer = (v) => `v${v.version} · ${new Date(v.fecha + "T12:00:00").toLocaleDateString("es", { day: "numeric", month: "short", year: "numeric" })}`;
+async function iniciarVersion() {
+  const v = await leerVersion();
+  if (!v) return;
+  versionActual = v;
+  $("bienVersion").textContent = fmtVer(v);
+  const vista = LS.get("ver");
+  if (vista && vista !== v.version) toast(`¡App actualizada a la ${fmtVer(v)}!`, v.mensaje, "Entendido");
+  LS.set("ver", v.version);
+}
+async function buscarActualizacion() {
+  const v = await leerVersion();
+  if (v && versionActual && v.version !== versionActual.version) {
+    toast(`Nueva versión ${v.version} disponible`, v.mensaje, "Actualizar", () => location.reload());
+  }
+}
+iniciarVersion();
+setInterval(buscarActualizacion, 5 * 60 * 1000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) buscarActualizacion(); });
+
+// ---- Instalar en la pantalla de inicio (iPhone y Android) ----
+(() => {
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const instalada = navigator.standalone || matchMedia("(display-mode: standalone)").matches;
+  if (instalada || FIJA) return;
+  const caja = $("instalar");
+  if (ios) {
+    $("instalarTxt").textContent = "Para instalarla: toca Compartir y luego «Añadir a pantalla de inicio».";
+    caja.hidden = false;
+  }
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    $("instalarTxt").textContent = "Instálala como app en tu teléfono.";
+    $("btnInstalar").hidden = false; caja.hidden = false;
+    $("btnInstalar").onclick = async () => { e.prompt(); await e.userChoice; caja.hidden = true; };
+  });
+})();
