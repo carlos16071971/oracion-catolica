@@ -38,26 +38,19 @@ npm run verificar      # comprueba 366 días sin repetir, celebraciones y horari
 
 Simular fecha y hora: `http://localhost:8787/?fecha=2026-12-25&hora=21:00`
 
-## Subir a GitHub
+## Publicar (automático, sin escribir comandos)
 
-```bash
-gh auth login
-gh repo create oracion-catolica --private --source=. --push
-# o, sin gh:
-git remote add origin https://github.com/TU_USUARIO/oracion-catolica.git && git push -u origin main
-```
+Haz **doble clic en `PUBLICAR.bat`** (Windows) o `PUBLICAR.command` (Mac/Linux). Requiere tener instalados [Node.js](https://nodejs.org) y [GitHub CLI](https://cli.github.com).
 
-## Desplegar en Cloudflare Pages
+La primera vez el asistente:
+1. abre el navegador para que inicies sesión en GitHub,
+2. crea el repositorio privado `oracion-catolica` y sube el código,
+3. te pide **un solo dato**: un token de Cloudflare (te indica dónde crearlo) y de ahí obtiene la cuenta, crea el proyecto de Pages y guarda los secretos,
+4. despliega y te muestra el enlace: `https://oracion-catolica.pages.dev`.
 
-**Opción A — conectar el repositorio (más simple, despliega en cada push):**
-Cloudflare → *Workers & Pages* → *Create* → *Pages* → *Connect to Git* → elige el repo.
-Framework: *None* · Build command: *(vacío)* · Build output directory: `public`.
+Después, cada vez que hagas cambios, ejecuta el mismo archivo (o simplemente haz `git push`): GitHub Actions verifica el contenido y vuelve a desplegar solo. Para ver los pasos sin ejecutar nada: `npm run publicar -- --simulacro`.
 
-**Opción B — GitHub Actions** (`.github/workflows/deploy.yml`, ya incluido): crea en GitHub los secretos `CLOUDFLARE_API_TOKEN` (permiso *Cloudflare Pages · Edit*) y `CLOUDFLARE_ACCOUNT_ID`, y crea el proyecto una vez con `npx wrangler pages project create oracion-catolica --production-branch=main`.
-
-**Opción C — subida directa:** `npm run deploy` o sube la carpeta `public/` como zip en el panel.
-
-Tras desplegar: *Purge Cache* y recarga forzada para evitar ver una versión vieja.
+Alternativa sin token: en Cloudflare → *Workers & Pages → Connect to Git*, elige el repo, directorio de salida `public`, sin build.
 
 ## Estructura
 
@@ -69,6 +62,7 @@ public/
   data/                              textos: figuras, mañana, noche, celebraciones, bienvenidas
   sw.js  manifest.webmanifest  icons/  PWA
 scripts/verificar.mjs                pruebas de contenido
+  scripts/publicar.mjs                 publicación automática (GitHub + Cloudflare)
 ```
 
 ## Nota sobre los textos

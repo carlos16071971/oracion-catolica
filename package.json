@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "npx --yes serve public -l 8787",
     "verificar": "node scripts/verificar.mjs",
+    "publicar": "node scripts/publicar.mjs",
     "deploy": "npx wrangler pages deploy public --project-name=oracion-catolica"
   }
 }
