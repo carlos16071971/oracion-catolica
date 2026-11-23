@@ -43,6 +43,9 @@ const PAL = {
   miguel: { cielo: ["#c4e0ff", "#3f88e8", "#101c4f"], manto: "#2a5bd7", tunica: "#f4d35e" },
   francisco: { cielo: ["#d8f3dc", "#74c69d", "#1b4332"], manto: "#7a4f2a", tunica: "#7a4f2a" },
   teresita: { cielo: ["#fff0e6", "#ffb3c1", "#6a2c70"], manto: "#ffffff", tunica: "#6b4a2b" },
+  senor: { cielo: ["#ffd9a0", "#d9822b", "#3b1d4f"] },
+  santisimo: { cielo: ["#fff3c4", "#e8b84a", "#4a2c6e"] },
+  rosario: { cielo: ["#e3e0ff", "#8f86f0", "#241a66"] },
   cruz: { cielo: ["#ffb199", "#ff3d6e", "#1a0b2e"] }
 };
 const TINTES = ["#ff9a3c", "#ff5e7e", "#7b5cff", "#2ec4b6", "#ffd166"];
@@ -231,6 +234,24 @@ function miguel(p) {
   return s;
 }
 
+const custodia = () => {
+  let s = rayosCuerpo(200, 170, 36) + aur(200, 170, 96);
+  for (let i = 0; i < 24; i++) { const a = (i * 2 * Math.PI) / 24, r1 = 70, r2 = i % 2 ? 92 : 112; s += `<path d="M${200 + r1 * Math.cos(a)} ${170 + r1 * Math.sin(a)}L${200 + r2 * Math.cos(a)} ${170 + r2 * Math.sin(a)}" stroke="${ORO2}" stroke-width="5" stroke-linecap="round"/>`; }
+  s += `<circle cx="200" cy="170" r="58" fill="#fff" stroke="${ORO2}" stroke-width="6"/><path d="M200 140V200M170 166H230" stroke="${ORO}" stroke-width="8" stroke-linecap="round"/>`;
+  s += `<path d="M200 228V380M176 276H224M170 330H230" stroke="${ORO2}" stroke-width="10" stroke-linecap="round"/><path d="M120 440Q200 372 280 440Z" fill="${ORO}" stroke="${ORO2}" stroke-width="4"/>`;
+  return s;
+};
+
+const rosario = () => {
+  let s = aur(200, 210, 60);
+  const cx = 200, cy = 210, R = 100;
+  for (let i = 0; i < 28; i++) { const a = (i * 2 * Math.PI) / 28 - Math.PI / 2; s += `<circle cx="${cx + R * Math.cos(a)}" cy="${cy + R * Math.sin(a)}" r="${i % 7 === 0 ? 10 : 6.5}" fill="${i % 7 === 0 ? "#7a2230" : "#a33a47"}" stroke="#0003"/>`; }
+  s += `<path d="M200 310V350" stroke="#0003" stroke-width="2"/>`;
+  for (let i = 0; i < 4; i++) s += `<circle cx="200" cy="${322 + i * 15}" r="6" fill="#a33a47" stroke="#0003"/>`;
+  s += `<rect x="190" y="386" width="20" height="80" rx="3" fill="#c9ced6" stroke="#0004"/><rect x="170" y="408" width="60" height="18" rx="3" fill="#c9ced6" stroke="#0004"/>`;
+  return s;
+};
+
 const cruz = () =>
   `${rayosCuerpo(200, 230, 32)}${aur(200, 230, 120)}<path d="M0 470Q120 410 200 438Q290 410 400 470V560H0Z" fill="#1a0b2e" opacity=".9"/><rect x="187" y="110" width="26" height="340" rx="4" fill="#7a4a21" stroke="#0003"/><rect x="128" y="168" width="144" height="24" rx="4" fill="#7a4a21" stroke="#0003"/><path d="M130 180L270 180" stroke="${ORO}" stroke-width="2" opacity=".6"/>`;
 
@@ -256,6 +277,9 @@ const DIBUJO = {
   miguel: (p) => miguel(p),
   francisco: (p) => monje(p, { cuerda: true, aves: true }),
   teresita: (p) => monje(p, { habito: p.tunica, velo: "#f4f1ea", rosasMano: true }),
+  senor: () => cruz(),
+  santisimo: () => custodia(),
+  rosario: () => rosario(),
   cruz: () => cruz()
 };
 

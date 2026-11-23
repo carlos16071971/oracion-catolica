@@ -19,5 +19,26 @@
   "dios": {
     "src": "img/dios.jpg",
     "pos": "50% 20%"
+  },
+  "nino": {
+    "src": "img/nino.jpg",
+    "pos": "50% 10%"
+  },
+  "jesus": {
+    "src": "img/jesus.jpg",
+    "pos": "50% 10%"
+  },
+  "senor": {
+    "src": "img/senor.jpg",
+    "pos": "50% 0%"
+  },
+  "santisimo": {
+    "src": "img/santisimo.jpg",
+    "pos": "50% 75%",
+    "zoom": 1.25
+  },
+  "rosario": {
+    "src": "img/rosario.jpg",
+    "pos": "50% 25%"
   }
 }

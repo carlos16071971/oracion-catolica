@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.4.0 — 2026-11-23
+Nuevas imágenes: Divino Niño Jesús, Sagrado Corazón, Señor Jesús, Santísimo Sacramento y Santo Rosario, mejoradas con IA para verse más nítidas. Ahora hay 24 figuras.
+
 ## 1.3.0 — 2026-11-23
 Fotos reales de la Virgen del Cisne, Virgen de Guadalupe, Santa Narcisa de Jesús, Virgen María y Dios Padre como fondo. Funcionan también sin conexión.
 

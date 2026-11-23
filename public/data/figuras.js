@@ -21,7 +21,10 @@ export const FIGURAS = [
   { id: "nino", nombre: "Divino Niño Jesús", m: "Divino Niño Jesús, ternura de Dios, bendíceme con tu sonrisa.", n: "Divino Niño Jesús, acuna mi sueño con tu paz." },
   { id: "miguel", nombre: "San Miguel Arcángel", m: "San Miguel Arcángel, defiéndeme en la lucha de cada día contra el mal.", n: "San Miguel Arcángel, protégeme esta noche y guarda mi hogar." },
   { id: "francisco", nombre: "San Francisco de Asís", m: "San Francisco de Asís, hermano de todas las criaturas, enséñame a alabar a Dios con alegría.", n: "San Francisco de Asís, gracias por tu ejemplo de sencillez; ruega por mí al caer la noche." },
-  { id: "teresita", nombre: "Santa Teresita del Niño Jesús", m: "Santa Teresita, maestra del camino pequeño, enséñame a amar en lo cotidiano.", n: "Santa Teresita, gracias por tu lluvia de rosas; ruega por mí al terminar el día." }
+  { id: "teresita", nombre: "Santa Teresita del Niño Jesús", m: "Santa Teresita, maestra del camino pequeño, enséñame a amar en lo cotidiano.", n: "Santa Teresita, gracias por tu lluvia de rosas; ruega por mí al terminar el día." },
+  { id: "senor", nombre: "Señor Jesús", m: "Señor Jesús, Camino, Verdad y Vida, guía mis pasos en este día.", n: "Señor Jesús, gracias por este día; quédate conmigo esta noche." },
+  { id: "santisimo", nombre: "Santísimo Sacramento", m: "Jesús Sacramentado, presente en el altar, adoro tu presencia al comenzar el día.", n: "Jesús Sacramentado, gracias por quedarte con nosotros; adoro tu presencia esta noche." },
+  { id: "rosario", nombre: "Santo Rosario", m: "Santa María, Madre del Rosario, que mis manos recen contigo y mi corazón descanse en Dios.", n: "Madre del Rosario, gracias por este día; que mi descanso sea una oración." },
 ];
 
 // Figuras que solo se usan en fechas especiales (no rotan a diario).

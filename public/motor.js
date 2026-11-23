@@ -112,7 +112,7 @@ export function contenido(d, que) {
     titulo: tema[0],
     figuraId: fig.id,
     figuraNombre: fig.nombre,
-    motivo: mod(dia + (noche ? 3 : 0), 8),
+    motivo: mod(dia + Math.floor(dia / FIGURAS.length) + (noche ? 3 : 0), 8), // el desfase evita repetir fondo cuando FIGURAS no es coprimo con 8
     parrafos: [
       P.APERTURAS[mod(dia, P.APERTURAS.length)] + " " + (noche ? fig.n : fig.m),
       tema[1],

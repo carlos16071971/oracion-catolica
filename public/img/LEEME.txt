@@ -7,7 +7,7 @@ Archivos: img/<id>.jpg (vertical, mínimo ~800 px de alto) y se registran en img
   pos  = punto de enfoque (x% y%). zoom = acerca la imagen solo en la tarjeta (para que el texto no tape el rostro).
   También se acepta "credito" y un enlace externo en "src".
 
-Ya incluidas: cisne, guadalupe, narcisa, maria, dios.
-Ids pendientes: jesus, misericordia, resucitado, espiritu, quinche, merced, carmen, fatima, lourdes, dolorosa,
-marianita, jose, nino, miguel, francisco, teresita, cruz.
+Ya incluidas: cisne, guadalupe, narcisa, maria, dios, nino, jesus (Sagrado Corazón), senor, santisimo, rosario.
+Ids pendientes: misericordia, resucitado, espiritu, quinche, merced, carmen, fatima, lourdes, dolorosa,
+marianita, jose, miguel, francisco, teresita, cruz.
 Usa solo imágenes propias o con permiso.
