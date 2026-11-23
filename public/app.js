@@ -136,7 +136,15 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && !$
 
 // ---- Service worker (funciona sin conexión) ----
 if ("serviceWorker" in navigator && location.protocol.startsWith("http") && !FIJA) {
-  navigator.serviceWorker.register("sw.js").catch(() => {});
+  const habiaControlador = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register("sw.js").then((reg) => {
+    // Busca una versión nueva de la app al volver a abrirla y cada 15 min mientras está abierta
+    const buscar = () => reg.update().catch(() => {});
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) buscar(); });
+    setInterval(buscar, 15 * 60 * 1000);
+  }).catch(() => {});
+  // Un service worker nuevo tomó el control = hay versión nueva instalada en este equipo
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (habiaControlador) aplicarActualizacion(null); });
 }
 
 // ---- Versión y avisos de actualización ----
@@ -168,11 +176,19 @@ async function iniciarVersion() {
   if (vista && vista !== v.version) toast(`¡App actualizada a la ${fmtVer(v)}!`, v.mensaje, "Entendido");
   LS.set("ver", v.version);
 }
+let recargando = false;
+// Actualización automática: en segundo plano recarga de inmediato; si la persona está leyendo, avisa y recarga en pocos segundos.
+function aplicarActualizacion(v) {
+  if (recargando) return;
+  recargando = true;
+  const recargar = () => location.reload();
+  if (document.hidden) return recargar();
+  toast(v ? `Actualizando a la v${v.version}…` : "Actualizando la aplicación…", v ? v.mensaje : "Hay una versión nueva; se aplicará en unos segundos.", "Ahora", recargar);
+  setTimeout(recargar, 6000);
+}
 async function buscarActualizacion() {
   const v = await leerVersion();
-  if (v && versionActual && v.version !== versionActual.version) {
-    toast(`Nueva versión ${v.version} disponible`, v.mensaje, "Actualizar", () => location.reload());
-  }
+  if (v && versionActual && v.version !== versionActual.version) aplicarActualizacion(v);
 }
 iniciarVersion();
 setInterval(buscarActualizacion, 5 * 60 * 1000);

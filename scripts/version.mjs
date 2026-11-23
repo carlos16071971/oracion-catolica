@@ -18,6 +18,10 @@ v.fecha = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-$
 v.mensaje = mensaje;
 writeFileSync(arch, JSON.stringify(v, null, 2) + "\n");
 
+// El service worker cambia con cada versión: así todos los equipos instalados descargan la actualización solos.
+const sw = join(raiz, "public", "sw.js");
+writeFileSync(sw, readFileSync(sw, "utf8").replace(/const VERSION = "[^"]*";/, `const VERSION = "oracion-v${v.version}";`));
+
 const cl = join(raiz, "CHANGELOG.md");
 const previo = existsSync(cl) ? readFileSync(cl, "utf8").replace(/^# Historial de versiones\n\n/, "") : "";
 writeFileSync(cl, `# Historial de versiones\n\n## ${v.version} — ${v.fecha}\n${mensaje}\n\n${previo}`);

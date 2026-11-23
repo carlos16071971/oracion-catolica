@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.5.0 — 2026-11-23
+Actualización automática: la app se actualiza sola en cada celular o equipo donde esté instalada, sin tocar nada.
+
 ## 1.4.0 — 2026-11-23
 Nuevas imágenes: Divino Niño Jesús, Sagrado Corazón, Señor Jesús, Santísimo Sacramento y Santo Rosario, mejoradas con IA para verse más nítidas. Ahora hay 24 figuras.
 
