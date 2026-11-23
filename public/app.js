@@ -15,21 +15,37 @@ const FIJA = (() => {
 const ahora = () => (FIJA ? new Date(FIJA.getTime() + (performance.now() - T0)) : new Date());
 const T0 = performance.now();
 
-// ---- Fondo con foto opcional: si existe /img/<figura>.jpg se usa sobre el arte vectorial ----
-// La lista img/fotos.json indica qué figuras tienen foto propia (por defecto ninguna), así no hay peticiones 404.
-const fotosDisponibles = fetch("img/fotos.json").then((r) => (r.ok ? r.json() : [])).catch(() => []);
-async function fotoDe(id) {
-  const lista = await fotosDisponibles;
-  return Array.isArray(lista) && lista.includes(id) ? `img/${id}.jpg` : null;
-}
+// ---- Fondo con imagen real (opcional) ----
+// img/fotos.json define qué figuras usan imagen real. Formatos aceptados por figura:
+//   "cisne"                                   -> archivo propio img/cisne.jpg
+//   "maria": {"src": "https://…", "credito": "…"}  -> imagen enlazada (ej. Wikimedia Commons)
+// Si la imagen no carga (sin conexión o enlace roto), se queda el arte vectorial: nunca se ve vacío.
+const fotosDisponibles = fetch("img/fotos.json")
+  .then((r) => (r.ok ? r.json() : {}))
+  .then((j) => {
+    const m = {};
+    if (Array.isArray(j)) j.forEach((id) => (m[id] = { src: `img/${id}.jpg` }));
+    else Object.entries(j || {}).forEach(([id, v]) => (m[id] = typeof v === "string" ? { src: v } : v));
+    return m;
+  })
+  .catch(() => ({}));
 async function pintarArte(contenedor, id, opts) {
   contenedor.innerHTML = arte(id, opts);
-  const url = await fotoDe(id);
-  if (url && contenedor.isConnected) {
-    const im = document.createElement("img");
-    im.src = url; im.alt = ""; im.decoding = "async";
+  const f = (await fotosDisponibles)[id];
+  if (!f || !f.src) return;
+  const im = new Image();
+  im.alt = ""; im.decoding = "async"; im.referrerPolicy = "no-referrer";
+  im.onload = () => {
+    if (!contenedor.isConnected) return;
+    im.className = "foto";
     contenedor.replaceChildren(im);
-  }
+    if (f.credito) {
+      const c = document.createElement("small");
+      c.className = "credito"; c.textContent = f.credito;
+      contenedor.appendChild(c);
+    }
+  };
+  im.src = f.src;
 }
 
 // ---- Render ----

@@ -1,1 +1,10 @@
-[]
+{
+  "maria": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Murillo_immaculate_conception.jpg/960px-Murillo_immaculate_conception.jpg",
+    "credito": "Murillo, La Inmaculada · dominio público"
+  },
+  "guadalupe": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1531_Nuestra_Se%C3%B1ora_de_Guadalupe_anagoria.jpg/960px-1531_Nuestra_Se%C3%B1ora_de_Guadalupe_anagoria.jpg",
+    "credito": "Foto: Anagoria · Wikimedia Commons"
+  }
+}
