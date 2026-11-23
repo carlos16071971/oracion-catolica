@@ -1,0 +1,10 @@
+Fotos propias (opcional)
+------------------------
+Si quieres usar una imagen real como fondo de una figura, copia aquí un archivo <id>.jpg
+(por ejemplo cisne.jpg, guadalupe.jpg, narcisa.jpg) y agrega el id a fotos.json:
+
+  ["cisne", "guadalupe", "narcisa"]
+
+Ids disponibles: dios, jesus, misericordia, resucitado, espiritu, maria, cisne, guadalupe, quinche,
+merced, carmen, fatima, lourdes, dolorosa, narcisa, marianita, jose, nino, miguel, francisco, teresita, cruz.
+Usa solo imágenes propias o de dominio público / con licencia. Formato vertical, mínimo 800x1100 px.

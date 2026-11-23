@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Oración Católica</title>
+<meta name="description" content="Una oración y una reflexión para cada amanecer y cada noche, todo el año.">
+<meta name="theme-color" content="#3b1c7a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Oración">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-periodo="manana">
+<div id="fondo" aria-hidden="true"></div>
+
+<main id="app" hidden>
+  <header class="top">
+    <div class="fecha">
+      <span id="fechaTxt"></span>
+      <strong id="momentoTxt"></strong>
+    </div>
+    <button id="btnSalir" class="salir" type="button" aria-label="Salir" title="Salir">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v8"/><path d="M6.4 6.6a8 8 0 1 0 11.2 0"/></svg>
+    </button>
+  </header>
+
+  <div id="aviso" class="aviso" hidden></div>
+
+  <section class="tarjeta oracion" id="tOracion" aria-labelledby="tituloOracion">
+    <div class="arte" id="arte"></div>
+    <div class="scrim"></div>
+    <div class="contenido">
+      <div class="chips">
+        <span class="chip" id="chipFigura"></span>
+        <span class="chip chip-esp" id="chipEsp" hidden></span>
+      </div>
+      <h1 id="tituloOracion"></h1>
+      <div class="texto" id="textoOracion"></div>
+    </div>
+  </section>
+
+  <section class="tarjeta reflexion" id="tReflexion" aria-labelledby="tituloReflexion">
+    <div class="contenido">
+      <h2 id="tituloReflexion">Reflexión</h2>
+      <div class="texto">
+        <p id="textoReflexion"></p>
+        <p class="cita" id="citaTxt" hidden></p>
+        <p class="proposito"><b>Propósito</b><span id="propositoTxt"></span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Bienvenida (distinta cada día) -->
+<div id="bienvenida" class="overlay bienvenida" role="dialog" aria-modal="true" aria-labelledby="bienTitulo">
+  <div class="arte" id="arteBien"></div>
+  <div class="scrim fuerte"></div>
+  <div class="bien-cuerpo">
+    <p class="bien-saludo" id="bienSaludo"></p>
+    <h1 id="bienTitulo"></h1>
+    <p class="bien-frase" id="bienFrase"></p>
+    <button id="btnEntrar" class="entrar" type="button">Entrar<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<!-- Despedida al salir -->
+<div id="despedida" class="overlay despedida" hidden>
+  <div class="despedida-cuerpo">
+    <svg viewBox="0 0 24 24" width="54" height="54" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M6 9h12"/></svg>
+    <p id="despedidaTxt"></p>
+    <small>Toca la pantalla para volver</small>
+  </div>
+</div>
+
+<noscript><p style="padding:2rem;color:#fff">Esta aplicación necesita JavaScript.</p></noscript>
+<script type="module" src="app.js"></script>
+</body>
+</html>

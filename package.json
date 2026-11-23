@@ -1,0 +1,12 @@
+{
+  "name": "oracion-catolica",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PWA de oración católica: oración de la mañana (hasta las 12:00) y de la noche (desde las 20:00), con reflexión.",
+  "scripts": {
+    "dev": "npx --yes serve public -l 8787",
+    "verificar": "node scripts/verificar.mjs",
+    "deploy": "npx wrangler pages deploy public --project-name=oracion-catolica"
+  }
+}

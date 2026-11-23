@@ -1,0 +1,31 @@
+name: Deploy a Cloudflare Pages
+
+# Cada push a main verifica el contenido y publica la carpeta public/ en Cloudflare Pages.
+# Requiere dos secretos en GitHub (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN  (permiso: Cloudflare Pages · Edit)
+#   CLOUDFLARE_ACCOUNT_ID
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verificar oraciones, fechas y horarios
+        run: node scripts/verificar.mjs
+      - name: Publicar en Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=oracion-catolica --branch=main
