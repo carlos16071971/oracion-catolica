@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.3.0 — 2026-11-23
+Fotos reales de la Virgen del Cisne, Virgen de Guadalupe, Santa Narcisa de Jesús, Virgen María y Dios Padre como fondo. Funcionan también sin conexión.
+
 ## 1.2.0 — 2026-11-23
 Imágenes reales de la Inmaculada (Murillo) y la Virgen de Guadalupe como fondo; si una imagen no carga, se mantiene el arte actual.
 

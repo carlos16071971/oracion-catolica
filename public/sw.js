@@ -1,9 +1,9 @@
 // Service worker: la app funciona sin conexión.
 // Convenciones (iOS): sin "./" en ASSETS; navegación = red primero y index cacheado solo como respaldo offline.
-const VERSION = "oracion-v2";
+const VERSION = "oracion-v3";
 const ASSETS = [
   "index.html", "styles.css", "app.js", "motor.js", "art.js", "manifest.webmanifest",
-  "img/fotos.json", "data/figuras.js", "data/manana.js", "data/noche.js", "data/especiales.js", "data/bienvenida.js",
+  "img/fotos.json", "img/cisne.jpg", "img/guadalupe.jpg", "img/narcisa.jpg", "img/maria.jpg", "img/dios.jpg", "data/figuras.js", "data/manana.js", "data/noche.js", "data/especiales.js", "data/bienvenida.js",
   "icons/icon.svg", "icons/icon-180.png", "icons/icon-192.png", "icons/icon-512.png"
 ];
 

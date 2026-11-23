@@ -1,10 +1,13 @@
-Fotos propias (opcional)
-------------------------
-Si quieres usar una imagen real como fondo de una figura, copia aquí un archivo <id>.jpg
-(por ejemplo cisne.jpg, guadalupe.jpg, narcisa.jpg) y agrega el id a fotos.json:
+Imágenes reales
+---------------
+Archivos: img/<id>.jpg (vertical, mínimo ~800 px de alto) y se registran en img/fotos.json:
 
-  ["cisne", "guadalupe", "narcisa"]
+  "cisne": {"src": "img/cisne.jpg", "pos": "50% 44%", "zoom": 1.3}
 
-Ids disponibles: dios, jesus, misericordia, resucitado, espiritu, maria, cisne, guadalupe, quinche,
-merced, carmen, fatima, lourdes, dolorosa, narcisa, marianita, jose, nino, miguel, francisco, teresita, cruz.
-Usa solo imágenes propias o de dominio público / con licencia. Formato vertical, mínimo 800x1100 px.
+  pos  = punto de enfoque (x% y%). zoom = acerca la imagen solo en la tarjeta (para que el texto no tape el rostro).
+  También se acepta "credito" y un enlace externo en "src".
+
+Ya incluidas: cisne, guadalupe, narcisa, maria, dios.
+Ids pendientes: jesus, misericordia, resucitado, espiritu, quinche, merced, carmen, fatima, lourdes, dolorosa,
+marianita, jose, nino, miguel, francisco, teresita, cruz.
+Usa solo imágenes propias o con permiso.

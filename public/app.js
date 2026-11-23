@@ -38,6 +38,13 @@ async function pintarArte(contenedor, id, opts) {
   im.onload = () => {
     if (!contenedor.isConnected) return;
     im.className = "foto";
+    if (f.pos) im.style.objectPosition = f.pos;
+    // zoom: solo en la tarjeta de oración (el texto tapa la parte baja); sube la imagen para que se vea el rostro
+    if (f.zoom && contenedor.closest(".tarjeta")) {
+      const py = parseFloat((f.pos || "50% 50%").split(" ")[1]) / 100;
+      im.style.position = "absolute"; im.style.left = "0"; im.style.width = "100%";
+      im.style.height = f.zoom * 100 + "%"; im.style.top = -(f.zoom - 1) * 100 * py + "%";
+    }
     contenedor.replaceChildren(im);
     if (f.credito) {
       const c = document.createElement("small");

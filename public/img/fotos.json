@@ -1,10 +1,23 @@
 {
-  "maria": {
-    "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Murillo_immaculate_conception.jpg/960px-Murillo_immaculate_conception.jpg",
-    "credito": "Murillo, La Inmaculada · dominio público"
+  "cisne": {
+    "src": "img/cisne.jpg",
+    "pos": "50% 44%",
+    "zoom": 1.3
   },
   "guadalupe": {
-    "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1531_Nuestra_Se%C3%B1ora_de_Guadalupe_anagoria.jpg/960px-1531_Nuestra_Se%C3%B1ora_de_Guadalupe_anagoria.jpg",
-    "credito": "Foto: Anagoria · Wikimedia Commons"
+    "src": "img/guadalupe.jpg",
+    "pos": "50% 40%"
+  },
+  "narcisa": {
+    "src": "img/narcisa.jpg",
+    "pos": "50% 25%"
+  },
+  "maria": {
+    "src": "img/maria.jpg",
+    "pos": "50% 22%"
+  },
+  "dios": {
+    "src": "img/dios.jpg",
+    "pos": "50% 20%"
   }
 }
