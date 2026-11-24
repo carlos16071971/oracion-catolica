@@ -187,12 +187,7 @@ export function dibujaVelada(c) {
     cab.appendChild(el("label", "form-etq", "¿A qué hora empieza?"));
     const hora = el("input", "campo-txt"); hora.type = "time"; hora.value = LS.get("velada_hora") || "19:00";
     const fin = el("p", "cfg-pista");
-    cab.append(hora, fin, el("p", "cfg-pista", "Toca cada punto para ver qué hacer, un ejemplo de lo que puedes decir, cómo hacerlo con alegría y qué evitar."));
-    const acc = el("div", "acciones");
-    const abrir = el("button", "mini", "Abrir todos"); abrir.type = "button";
-    const cerrar = el("button", "mini", "Cerrar todos"); cerrar.type = "button";
-    acc.append(abrir, cerrar);
-    cab.appendChild(acc);
+    cab.append(hora, fin, el("p", "cfg-pista", "Toca un punto para ver qué hacer (se abre uno a la vez), un ejemplo de lo que puedes decir, cómo hacerlo con alegría y qué evitar."));
     panel.appendChild(cab);
 
     const lista = el("div", "grupo");
@@ -241,8 +236,6 @@ export function dibujaVelada(c) {
     panel.appendChild(lista);
     pintaHoras();
     for (const ev of ["input", "change"]) hora.addEventListener(ev, () => { LS.set("velada_hora", hora.value); pintaHoras(); });
-    abrir.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = true)));
-    cerrar.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = false)));
   }
 
   // ---------- Guion ----------
@@ -252,11 +245,9 @@ export function dibujaVelada(c) {
   }
   function pintaGuion(panel) {
     const nota = el("section", "card card-intro");
-    nota.appendChild(el("p", "intro-txt", "Toca cada paso para abrirlo. Lo que dice el guía, todos o el lector está marcado; las notas son indicaciones para ti y no se leen en voz alta."));
+    nota.appendChild(el("p", "intro-txt", "Toca un paso para abrirlo (se abre uno a la vez). Lo que dice el guía, todos o el lector está marcado; las notas son indicaciones para ti y no se leen en voz alta."));
     const acc = el("div", "acciones");
-    const abrir = el("button", "mini", "Abrir todos"); abrir.type = "button";
-    const cerrar = el("button", "mini", "Cerrar todos"); cerrar.type = "button";
-    acc.append(abrir, cerrar, botonCopiar(() => VELADA.pasos.map(textoPaso).join("\n\n———\n\n"), "Copiar guion completo"));
+    acc.append(botonCopiar(() => VELADA.pasos.map(textoPaso).join("\n\n———\n\n"), "Copiar guion completo"));
     nota.appendChild(acc);
     panel.appendChild(nota);
     const lista = el("div", "grupo");
@@ -274,8 +265,6 @@ export function dibujaVelada(c) {
       lista.appendChild(d);
     });
     panel.appendChild(lista);
-    abrir.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = true)));
-    cerrar.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = false)));
     if (pasoAbrir >= 0) {
       const d = lista.children[pasoAbrir];
       pasoAbrir = -1;

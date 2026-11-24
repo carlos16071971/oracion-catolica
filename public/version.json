@@ -1,5 +1,5 @@
 {
-  "version": "1.8.1",
+  "version": "1.8.2",
   "fecha": "2026-11-24",
-  "mensaje": "Velada: cada punto del programa ahora se despliega con qué hacer, un ejemplo real, cómo lograr una noche feliz y agradecida, y qué evitar; con hora de cada momento"
+  "mensaje": "Los desplegables se abren de uno en uno: al abrir uno, los demás se cierran"
 }

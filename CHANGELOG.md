@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.2 — 2026-11-24
+Los desplegables se abren de uno en uno: al abrir uno, los demás se cierran
+
 ## 1.8.1 — 2026-11-24
 Velada: cada punto del programa ahora se despliega con qué hacer, un ejemplo real, cómo lograr una noche feliz y agradecida, y qué evitar; con hora de cada momento
 

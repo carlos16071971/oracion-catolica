@@ -87,6 +87,13 @@ export function iniciarSecciones(opts = {}) {
   ctxDiario = { hoy, reflexionHoy: opts.reflexionHoy || (() => null) };
   iniciarMenu();
   $("btnAtras").addEventListener("click", cerrarSeccion);
+  // Desplegables: solo uno abierto a la vez en cada pantalla (el evento "toggle" no sube, por eso se captura).
+  $("seccionCuerpo").addEventListener("toggle", (e) => {
+    const d = e.target;
+    if (!(d instanceof HTMLDetailsElement) || !d.open || !d.classList.contains("acordeon")) return;
+    for (const o of $("seccionCuerpo").querySelectorAll("details.acordeon[open]")) if (o !== d) o.open = false;
+    requestAnimationFrame(() => d.scrollIntoView({ block: "start", behavior: "smooth" }));
+  }, true);
   window.addEventListener("popstate", () => { if (seccionAbierta) ocultarSeccion(); });
 }
 
