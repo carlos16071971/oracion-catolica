@@ -106,3 +106,46 @@ export const NOVENA = {
     { t: "Gracias y entrega", c: "Al terminar este camino te doy gracias por todo lo recibido. Quiero llevar tu luz a mi casa y a mi trabajo, y vivir cada día como quien te lleva en brazos.", p: "Niño Jesús, quédate conmigo. Haz de mi vida un pesebre donde nazcas cada día." }
   ]
 };
+
+// ---------- Oraciones católicas ----------
+// Las oraciones tradicionales (Padrenuestro, Avemaría, Gloria, Credo, Ángel de la Guarda, Acto de contrición, San Miguel, Bajo tu amparo)
+// se dan en su forma de uso común; las demás son redacciones sencillas para la oración personal.
+export const ORACIONES = {
+  intro: "Las oraciones de siempre, para aprenderlas, rezarlas en familia o recordarlas cuando las necesites.",
+  grupos: [
+    {
+      titulo: "Las oraciones básicas",
+      items: [
+        { n: "Persignarse y santiguarse", nota: "Con la mano derecha, traza tres cruces pequeñas con el pulgar: en la frente, en la boca y en el pecho. Luego santíguate con una cruz grande: de la frente al pecho y del hombro izquierdo al derecho.", txt: ["Por la señal de la santa cruz, de nuestros enemigos líbranos, Señor, Dios nuestro.", "En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén."] },
+        { n: "Padrenuestro", cita: "Mt 6,9-13", txt: ["Padre nuestro, que estás en el cielo, santificado sea tu nombre; venga a nosotros tu reino; hágase tu voluntad en la tierra como en el cielo.", "Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén."] },
+        { n: "Avemaría", cita: "Lc 1,28 · Lc 1,42", txt: ["Dios te salve, María, llena eres de gracia, el Señor es contigo; bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús.", "Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén."] },
+        { n: "Gloria", txt: ["Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén."] },
+        { n: "Credo (Símbolo de los Apóstoles)", txt: ["Creo en Dios, Padre todopoderoso, Creador del cielo y de la tierra.", "Creo en Jesucristo, su único Hijo, nuestro Señor, que fue concebido por obra y gracia del Espíritu Santo, nació de santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos y está sentado a la derecha de Dios, Padre todopoderoso. Desde allí ha de venir a juzgar a vivos y muertos.", "Creo en el Espíritu Santo, la santa Iglesia católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén."] }
+      ]
+    },
+    {
+      titulo: "Oraciones de siempre",
+      items: [
+        { n: "Ángel de la Guarda", nota: "Una oración sencilla para la mañana y para la noche, muy querida por los niños.", txt: ["Ángel de la guarda, dulce compañía, no me desampares ni de noche ni de día. No me dejes solo, que me perdería. Amén."] },
+        { n: "Acto de contrición", nota: "Para rezar antes de dormir (examen de conciencia) y como preparación para la confesión.", txt: ["Señor mío, Jesucristo, Dios y hombre verdadero, Creador, Padre y Redentor mío, por ser Tú quien eres, bondad infinita, y porque te amo sobre todas las cosas, me pesa de todo corazón haberte ofendido.", "Ayudado de tu divina gracia, propongo firmemente nunca más pecar, confesarme y cumplir la penitencia que me fuere impuesta. Amén.", "Versión breve: Jesús, Hijo de Dios, ten misericordia de mí, que soy pecador."] }
+      ]
+    },
+    {
+      titulo: "Oraciones de protección",
+      items: [
+        { n: "San Miguel Arcángel", txt: ["San Miguel Arcángel, defiéndenos en la lucha; sé nuestro amparo contra la maldad y las asechanzas del demonio. Que Dios manifieste sobre él su poder, es nuestra humilde súplica.", "Y tú, Príncipe de la milicia celestial, con el poder que Dios te ha conferido, arroja al infierno a Satanás y a los demás espíritus malignos que andan por el mundo para perdición de las almas. Amén."] },
+        { n: "Bajo tu amparo", nota: "Una de las oraciones más antiguas a la Virgen María.", txt: ["Bajo tu amparo nos acogemos, santa Madre de Dios; no desprecies las súplicas que te dirigimos en nuestras necesidades, antes bien líbranos de todo peligro, oh Virgen gloriosa y bendita. Amén."] },
+        { n: "Para bendecir el hogar", txt: ["Señor Jesús, bendice esta casa y a cuantos vivimos en ella. Aleja de nosotros todo mal, cuida nuestro descanso y nuestros caminos, y haz que reine aquí tu paz. María, Madre nuestra, y san José, protejan a nuestra familia. Amén."] },
+        { n: "Al salir de casa", txt: ["Señor, voy a empezar mi jornada. Ve conmigo en el camino, protégeme de todo peligro y ayúdame a ser luz para quienes encuentre. Que vuelva sano y salvo a mi casa. Amén."] }
+      ]
+    },
+    {
+      titulo: "Por la familia y los enfermos",
+      items: [
+        { n: "Por la familia", txt: ["Señor Jesús, que creciste en la familia de Nazaret, bendice a la mía. Une nuestros corazones, enséñanos a perdonar, a escucharnos y a rezar juntos.", "Cuida a los niños, sostén a los mayores, reconcilia a los que están distanciados y llena nuestro hogar de tu paz. Sagrada Familia de Nazaret, ruega por nosotros. Amén."] },
+        { n: "Por los enfermos", txt: ["Señor Jesús, médico de los cuerpos y de las almas, mira con ternura a nuestros hermanos enfermos. Dales alivio en el dolor, paciencia en la prueba y esperanza en tu amor.", "Bendice las manos de los médicos y enfermeras, y acompaña a las familias que los cuidan. Si es tu voluntad, devuélveles la salud; y si no, dales la fuerza para unirse a tu cruz. Santa María, salud de los enfermos, ruega por ellos. Amén."] },
+        { n: "Por un enfermo querido", txt: ["Padre bueno, pongo en tus manos a mi ser querido que sufre. Tú lo conoces y lo amas más que yo. Dale descanso, calma su miedo y fortalece a quienes lo acompañamos.", "Jesús, yo confío en ti. Amén."] }
+      ]
+    }
+  ]
+};

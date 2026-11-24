@@ -128,7 +128,10 @@ function salir() {
   setTimeout(() => { try { window.close(); } catch (_) {} }, 2200);
 }
 $("btnSalir").addEventListener("click", salir);
-iniciarSecciones({ hoy: ahora });
+iniciarSecciones({
+  hoy: ahora,
+  reflexionHoy: () => { const d = ahora(); const c = contenido(d, estado(d).que); return { titulo: c.titulo, reflexion: c.reflexion, proposito: c.proposito }; }
+});
 $("despedida").addEventListener("click", () => { $("despedida").hidden = true; });
 $("btnEntrar").addEventListener("click", entrar);
 

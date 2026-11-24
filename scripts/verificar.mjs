@@ -6,7 +6,7 @@ import * as MA from "../public/data/manana.js";
 import * as NO from "../public/data/noche.js";
 import { TITULOS, FRASES } from "../public/data/bienvenida.js";
 import { ESPECIALES } from "../public/data/especiales.js";
-import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_TEMAS, NOVENA } from "../public/data/devocionario.js";
+import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_TEMAS, NOVENA, ORACIONES } from "../public/data/devocionario.js";
 
 let fallos = 0;
 const ok = (c, msg) => { if (!c) { fallos++; console.error("✗", msg); } else console.log("✓", msg); };
@@ -81,6 +81,10 @@ ok(new Set(SALMOS.map((x) => x.n)).size === SALMOS.length && SALMOS.every((x) =>
 const temas = SALMOS_TEMAS.map((x) => x[0]);
 ok(SALMOS.every((x) => x.t.every((t) => temas.includes(t))), "Los temas de los salmos existen en los filtros");
 ok(NOVENA.dias.length === 9 && NOVENA.dias.every((d) => d.t && d.c && d.p), "La novena tiene 9 días completos");
+
+const oraciones = ORACIONES.grupos.flatMap((g) => g.items).map((o) => o.n);
+for (const n of ["Persignarse", "Padrenuestro", "Avemaría", "Gloria", "Credo", "Ángel de la Guarda", "Acto de contrición", "San Miguel", "familia", "enfermos"]) ok(oraciones.some((o) => o.includes(n)), `Oraciones católicas incluye «${n}»`);
+ok(ORACIONES.grupos.flatMap((g) => g.items).every((o) => o.txt.length && o.txt.every((t) => t.length > 20)), "Todas las oraciones tienen texto");
 
 console.log(fallos ? `\n${fallos} fallo(s)` : "\nTodo correcto");
 process.exit(fallos ? 1 : 0);

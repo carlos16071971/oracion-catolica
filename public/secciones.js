@@ -1,5 +1,6 @@
 // Menú desplegable y pantallas de Mandamientos, Sacramentos, Salmos y Novena al Niño Jesús.
-import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_NOTA, SALMOS_TEMAS, NOVENA } from "./data/devocionario.js";
+import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_NOTA, SALMOS_TEMAS, NOVENA, ORACIONES } from "./data/devocionario.js";
+import { dibujaDiario } from "./diario.js";
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
@@ -12,11 +13,14 @@ const LS = {
 
 // Iconos y datos del menú
 const SECCIONES = {
+  oraciones: { titulo: "Oraciones católicas", sub: "Las oraciones de siempre, para rezar y aprender", color: "#7be0c3", icono: ico('<path d="M12 3v18M7 8h10"/>'), dibuja: dibujaOraciones },
   mandamientos: { titulo: "Mandamientos", sub: "Los diez mandamientos de la Ley de Dios", color: "#ffb02e", icono: ico('<rect x="4" y="3" width="7" height="18" rx="3"/><rect x="13" y="3" width="7" height="18" rx="3"/><path d="M7.5 8v.01M16.5 8v.01M7.5 12v.01M16.5 12v.01"/>'), dibuja: dibujaMandamientos },
   sacramentos: { titulo: "Sacramentos", sub: "Los siete signos de la gracia de Dios", color: "#ff6b8b", icono: ico('<path d="M7 4h10l-1 6a4 4 0 0 1-8 0z"/><path d="M12 14v5M8.5 20h7"/>'), dibuja: dibujaSacramentos },
   salmos: { titulo: "Salmos", sub: "Oraciones del pueblo de Dios para cada momento", color: "#46c2ff", icono: ico('<path d="M5 20V5a2 2 0 0 1 2-2h11v15H7a2 2 0 0 0-2 2z"/><path d="M5 20a2 2 0 0 0 2 2h11"/><path d="M10 8h5"/>'), dibuja: dibujaSalmos },
-  novena: { titulo: "Novena al Niño Jesús", sub: "Nueve días de oración con el Divino Niño", color: "#b98cff", icono: ico('<path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.4 6-5.4-3.2L6.6 19.3l1.4-6L3.4 9.2l6.1-.6z"/>'), dibuja: dibujaNovena }
+  novena: { titulo: "Novena al Niño Jesús", sub: "Nueve días de oración con el Divino Niño", color: "#b98cff", icono: ico('<path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.4 6-5.4-3.2L6.6 19.3l1.4-6L3.4 9.2l6.1-.6z"/>'), dibuja: dibujaNovena },
+  diario: { titulo: "Mi diario espiritual", sub: "Intenciones, gratitud, reflexiones y hábitos de oración", color: "#ffd45e", icono: ico('<path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M10 8h6M10 12h6M10 16h3"/>'), dibuja: (c) => dibujaDiario(c, ctxDiario) }
 };
+let ctxDiario = { hoy: () => new Date(), reflexionHoy: () => null };
 
 let hoy = () => new Date();
 let seccionAbierta = null;
@@ -25,6 +29,7 @@ let seccionAbierta = null;
 function iniciarMenu() {
   const lista = $("menuLista");
   for (const [id, s] of Object.entries(SECCIONES)) {
+    if (id === "diario") lista.appendChild(el("p", "menu-sep", "Mi espacio"));
     const b = el("button", "menu-item");
     b.type = "button"; b.setAttribute("role", "menuitem"); b.dataset.sec = id;
     b.innerHTML = `<span class="menu-ico" style="--c:${s.color}">${s.icono}</span><span class="menu-tx"><b>${s.titulo}</b><small>${s.sub}</small></span><svg class="menu-go" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>`;
@@ -76,6 +81,7 @@ function ocultarSeccion() {
 
 export function iniciarSecciones(opts = {}) {
   if (opts.hoy) hoy = opts.hoy;
+  ctxDiario = { hoy, reflexionHoy: opts.reflexionHoy || (() => null) };
   iniciarMenu();
   $("btnAtras").addEventListener("click", cerrarSeccion);
   window.addEventListener("popstate", () => { if (seccionAbierta) ocultarSeccion(); });
@@ -246,4 +252,37 @@ function dibujaNovena(c) {
     cuerpo.appendChild(marca);
   };
   pintar();
+}
+
+// ---------- Oraciones católicas ----------
+function dibujaOraciones(c) {
+  const intro = el("section", "card card-intro");
+  intro.appendChild(el("p", "intro-txt", ORACIONES.intro));
+  c.appendChild(intro);
+  for (const g of ORACIONES.grupos) {
+    const sec = el("section", "grupo");
+    sec.appendChild(el("h3", "grupo-tit", g.titulo));
+    for (const o of g.items) {
+      const d = el("details", "card acordeon");
+      const sm = el("summary");
+      const tit = el("span", "acc-tit");
+      if (o.cita) tit.appendChild(el("small", "acc-pre", o.cita));
+      tit.appendChild(document.createTextNode(o.n));
+      sm.append(tit, chevron());
+      d.appendChild(sm);
+      const cu = el("div", "acc-cu acc-cu-ancho");
+      if (o.nota) cu.appendChild(el("p", "nota", o.nota));
+      for (const t of o.txt) cu.appendChild(el("p", "salmo-txt", t));
+      const cp = el("button", "mini", "Copiar"); cp.type = "button";
+      cp.addEventListener("click", async () => {
+        const texto = `${o.n}\n\n${o.txt.join("\n\n")}`;
+        try { await navigator.clipboard.writeText(texto); cp.textContent = "¡Copiada!"; } catch (_) { cp.textContent = "No se pudo copiar"; }
+        setTimeout(() => { cp.textContent = "Copiar"; }, 2000);
+      });
+      cu.appendChild(el("div", "acciones")).appendChild(cp);
+      d.appendChild(cu);
+      sec.appendChild(d);
+    }
+    c.appendChild(sec);
+  }
 }
