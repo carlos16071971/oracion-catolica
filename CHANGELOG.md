@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.6.0 — 2026-11-23
+Nuevo menú (flecha arriba a la izquierda) con Mandamientos, Sacramentos, Salmos y Novena al Niño Jesús. Pantalla principal reorganizada: oración, reflexión con cita y propósito del día.
+
 ## 1.5.0 — 2026-11-23
 Actualización automática: la app se actualiza sola en cada celular o equipo donde esté instalada, sin tocar nada.
 

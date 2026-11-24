@@ -1,5 +1,6 @@
 import { contenido, bienvenida, estado } from "./motor.js";
 import { arte } from "./art.js";
+import { iniciarSecciones } from "./secciones.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -91,7 +92,7 @@ function render(forzar = false) {
   $("textoReflexion").textContent = c.reflexion;
   const cita = $("citaTxt");
   cita.hidden = !c.cita;
-  cita.textContent = c.cita ? "— " + c.cita : "";
+  cita.textContent = c.cita || "";
   $("propositoTxt").textContent = c.proposito;
   $("tOracion").querySelector(".texto").scrollTop = 0;
   $("tReflexion").querySelector(".texto").scrollTop = 0;
@@ -127,6 +128,7 @@ function salir() {
   setTimeout(() => { try { window.close(); } catch (_) {} }, 2200);
 }
 $("btnSalir").addEventListener("click", salir);
+iniciarSecciones({ hoy: ahora });
 $("despedida").addEventListener("click", () => { $("despedida").hidden = true; });
 $("btnEntrar").addEventListener("click", entrar);
 

@@ -6,6 +6,7 @@ import * as MA from "../public/data/manana.js";
 import * as NO from "../public/data/noche.js";
 import { TITULOS, FRASES } from "../public/data/bienvenida.js";
 import { ESPECIALES } from "../public/data/especiales.js";
+import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_TEMAS, NOVENA } from "../public/data/devocionario.js";
 
 let fallos = 0;
 const ok = (c, msg) => { if (!c) { fallos++; console.error("✗", msg); } else console.log("✓", msg); };
@@ -72,6 +73,14 @@ const t = (d) => { const e = estado(d); return `${e.periodo}/${e.que}/${e.espera
 ok(t(h(0, 0)) === "manana/manana/null" && t(h(11, 59)) === "manana/manana/null", "00:00–11:59 → oración de la mañana");
 ok(t(h(12, 0)).startsWith("tarde/manana/480") && t(h(16, 13)).startsWith("tarde/manana/227"), "12:00–19:59 → espera (cuenta regresiva a las 20:00)");
 ok(t(h(20, 0)) === "noche/noche/null" && t(h(23, 59)) === "noche/noche/null", "20:00–23:59 → oración de la noche");
+
+// 5) Menú: mandamientos, sacramentos, salmos y novena
+ok(MANDAMIENTOS.grupos.flatMap((g) => g.items).length === 10, "Hay 10 mandamientos");
+ok(SACRAMENTOS.grupos.flatMap((g) => g.items).length === 7, "Hay 7 sacramentos");
+ok(new Set(SALMOS.map((x) => x.n)).size === SALMOS.length && SALMOS.every((x) => x.txt.length > 80 && x.t.length), `Salmos sin repetir y con texto (${SALMOS.length})`);
+const temas = SALMOS_TEMAS.map((x) => x[0]);
+ok(SALMOS.every((x) => x.t.every((t) => temas.includes(t))), "Los temas de los salmos existen en los filtros");
+ok(NOVENA.dias.length === 9 && NOVENA.dias.every((d) => d.t && d.c && d.p), "La novena tiene 9 días completos");
 
 console.log(fallos ? `\n${fallos} fallo(s)` : "\nTodo correcto");
 process.exit(fallos ? 1 : 0);
