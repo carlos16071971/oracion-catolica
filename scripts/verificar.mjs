@@ -6,6 +6,7 @@ import * as MA from "../public/data/manana.js";
 import * as NO from "../public/data/noche.js";
 import { TITULOS, FRASES } from "../public/data/bienvenida.js";
 import { ESPECIALES } from "../public/data/especiales.js";
+import { VELADA, NOVENARIO } from "../public/data/guias.js";
 import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_TEMAS, NOVENA, ORACIONES } from "../public/data/devocionario.js";
 
 let fallos = 0;
@@ -85,6 +86,18 @@ ok(NOVENA.dias.length === 9 && NOVENA.dias.every((d) => d.t && d.c && d.p), "La 
 const oraciones = ORACIONES.grupos.flatMap((g) => g.items).map((o) => o.n);
 for (const n of ["Persignarse", "Padrenuestro", "Avemaría", "Gloria", "Credo", "Ángel de la Guarda", "Acto de contrición", "San Miguel", "familia", "enfermos"]) ok(oraciones.some((o) => o.includes(n)), `Oraciones católicas incluye «${n}»`);
 ok(ORACIONES.grupos.flatMap((g) => g.items).every((o) => o.txt.length && o.txt.every((t) => t.length > 20)), "Todas las oraciones tienen texto");
+
+// Guías de celebración (velada y novenario)
+{
+  const textos = (o) => JSON.stringify(o);
+  ok(VELADA.pasos.length >= 12 && VELADA.pasos.every((p) => p.n && p.min > 0 && p.partes.length > 0), "La velada tiene todos sus pasos");
+  ok(VELADA.pasos.every((p) => p.partes.every((x) => ["guia", "todos", "lector", "canto", "nota"].includes(x.r) && (typeof x.t === "string" ? x.t.length > 3 : x.t.n && x.t.v))), "Cada línea de la velada tiene rol válido y versión para Niño y Virgen");
+  ok(VELADA.lecturas.n.length > 0 && VELADA.lecturas.v.length > 0, "La velada tiene lecturas para Niño y Virgen");
+  ok(!/\{(?!imagen\}|pueblo\})\w+\}/.test(textos(VELADA)), "La velada solo usa las variables {imagen} y {pueblo}");
+  ok(NOVENARIO.noches.length === 9 && NOVENARIO.noches.every((n) => n.t && n.cita && n.resumen && n.reflexion && n.oracion && n.peticion && n.obra), "El novenario tiene 9 noches completas");
+  ok(new Set(NOVENARIO.noches.map((n) => n.cita)).size === 9, "Las 9 noches tienen lecturas distintas");
+  ok(!/\{(?!nombre\}|lo\}|el\}|o\}|hermano\})\w+\}/.test(textos(NOVENARIO)), "El novenario solo usa variables conocidas");
+}
 
 console.log(fallos ? `\n${fallos} fallo(s)` : "\nTodo correcto");
 process.exit(fallos ? 1 : 0);

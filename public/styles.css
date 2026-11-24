@@ -363,3 +363,54 @@ body[data-periodo="noche"] .mini.peligro { color: #ff8f84; }
 .sem-nombre { font: 700 .74rem/1.2 var(--sans); padding-right: 4px; }
 .sem-celda { height: 40px; min-width: 0; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--refl-acento) 30%, transparent); background: transparent; cursor: pointer; }
 .sem-celda.on { background: #3fbf86; border-color: #3fbf86; }
+
+/* ---------- Guías de celebración (velada y novenario) ---------- */
+.gpanel { display: flex; flex-direction: column; gap: 12px; }
+.cfg { display: flex; flex-direction: column; gap: 8px; }
+.cfg-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.cfg-chips .mini.fuerte { background: var(--refl-acento); color: var(--num-tx); }
+.cfg .campo-txt { min-height: 48px; resize: none; }
+.cfg-pista { font: .78rem/1.4 var(--sans); opacity: .78; }
+.paso-txt, .linea-tx { white-space: pre-line; }
+.pet-li { padding: 8px 0; border-top: 1px dashed color-mix(in srgb, var(--refl-acento) 25%, transparent); }
+.pet-li:first-of-type { border-top: 0; }
+.sub-etq { font: 800 .68rem var(--sans); letter-spacing: .12em; text-transform: uppercase; opacity: .75; margin: 12px 0 3px; }
+.cita-pill { display: inline-block; font: 800 .78rem var(--sans); padding: 4px 12px; border-radius: 999px; color: var(--num-tx); background: var(--refl-acento); margin-bottom: 8px; }
+.cuenta { font-weight: 700; opacity: .75; letter-spacing: 0; text-transform: none; }
+.dia em { font: 700 .62rem var(--sans); font-style: normal; opacity: .85; margin-top: 1px; }
+
+.linea { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; }
+.linea .rol { flex: none; min-width: 56px; padding-top: 3px; font: 800 .62rem var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--refl-acento); }
+.linea-tx { font-family: var(--serif); font-size: 1rem; line-height: 1.55; min-width: 0; }
+.rol-todos .linea-tx { font-weight: 700; }
+.rol-canto .linea-tx { font-style: italic; }
+.rol-nota { display: block; padding: 0; margin: 4px 0; }
+.rol-nota .linea-tx { font: .84rem/1.45 var(--sans); opacity: .85; padding: 8px 10px; border-radius: 12px; background: color-mix(in srgb, var(--refl-acento) 10%, transparent); }
+
+.chk-lista { display: flex; flex-direction: column; }
+.chk { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 8px 2px; cursor: pointer; }
+.chk input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chk-caja { flex: none; width: 24px; height: 24px; border-radius: 8px; border: 2px solid color-mix(in srgb, var(--refl-acento) 60%, transparent); display: grid; place-items: center; transition: background .15s; margin-top: 1px; }
+.chk input:checked + .chk-caja { background: var(--refl-acento); border-color: transparent; }
+.chk input:checked + .chk-caja::after { content: "✓"; color: var(--num-tx); font: 800 .85rem var(--sans); }
+.chk input:checked ~ .chk-tx { opacity: .6; text-decoration: line-through; }
+.chk input:focus-visible + .chk-caja { outline: 3px solid var(--oro); outline-offset: 2px; }
+.chk-tx { font-family: var(--serif); font-size: .98rem; line-height: 1.4; }
+
+.dos + .dos { margin-top: 10px; }
+.dos-tit { font: 800 .72rem var(--sans); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+.dos-tit.si { color: #1f9d55; }
+.dos-tit.no { color: #c0392b; }
+body[data-periodo="noche"] .dos-tit.si { color: #5ee0a0; }
+body[data-periodo="noche"] .dos-tit.no { color: #ff8f84; }
+.lista-pts { margin: 0; padding-left: 1.15em; font-family: var(--serif); font-size: .98rem; line-height: 1.5; }
+.lista-pts li + li { margin-top: 5px; }
+.roles { margin: 0; }
+.roles dt { font: 800 .86rem var(--sans); margin-top: 8px; }
+.roles dd { margin: 1px 0 0; font-family: var(--serif); font-size: .95rem; line-height: 1.4; }
+.programa { margin: 0; padding: 0; list-style: none; counter-reset: p; }
+.programa li { counter-increment: p; display: flex; gap: 10px; align-items: baseline; padding: 7px 0; border-top: 1px dashed color-mix(in srgb, var(--refl-acento) 25%, transparent); }
+.programa li:first-child { border-top: 0; }
+.programa li::before { content: counter(p); flex: none; width: 22px; font: 800 .8rem var(--sans); color: var(--refl-acento); }
+.pr-n { flex: 1; font-family: var(--serif); font-size: .98rem; line-height: 1.35; }
+.pr-m { flex: none; font: 700 .76rem var(--sans); opacity: .7; }

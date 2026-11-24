@@ -1,6 +1,7 @@
-// Menú desplegable y pantallas de Mandamientos, Sacramentos, Salmos y Novena al Niño Jesús.
+// Menú desplegable y pantallas de Mandamientos, Sacramentos, Salmos, Novena, Oraciones, guías de celebración y Diario.
 import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_NOTA, SALMOS_TEMAS, NOVENA, ORACIONES } from "./data/devocionario.js";
 import { dibujaDiario } from "./diario.js";
+import { dibujaVelada, dibujaNovenario } from "./guias.js";
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
@@ -18,6 +19,8 @@ const SECCIONES = {
   sacramentos: { titulo: "Sacramentos", sub: "Los siete signos de la gracia de Dios", color: "#ff6b8b", icono: ico('<path d="M7 4h10l-1 6a4 4 0 0 1-8 0z"/><path d="M12 14v5M8.5 20h7"/>'), dibuja: dibujaSacramentos },
   salmos: { titulo: "Salmos", sub: "Oraciones del pueblo de Dios para cada momento", color: "#46c2ff", icono: ico('<path d="M5 20V5a2 2 0 0 1 2-2h11v15H7a2 2 0 0 0-2 2z"/><path d="M5 20a2 2 0 0 0 2 2h11"/><path d="M10 8h5"/>'), dibuja: dibujaSalmos },
   novena: { titulo: "Novena al Niño Jesús", sub: "Nueve días de oración con el Divino Niño", color: "#b98cff", icono: ico('<path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.4 6-5.4-3.2L6.6 19.3l1.4-6L3.4 9.2l6.1-.6z"/>'), dibuja: dibujaNovena },
+  velada: { titulo: "Velada al Niño Dios o Virgen", sub: "Guía completa para dirigir una velada sin sacerdote", color: "#ff9a5c", icono: ico('<path d="M12 3c2 3 4 4.5 4 7.5a4 4 0 0 1-8 0C8 7.500 10 6 12 3z"/><path d="M9 21h6M12 15v6"/>'), dibuja: dibujaVelada },
+  novenario: { titulo: "Novenario por un difunto", sub: "Las nueve noches de oración por un familiar", color: "#8fb8ff", icono: ico('<path d="M20 14.5A8 8 0 1 1 9.500 4a6.500 6.500 0 0 0 10.500 10.500z"/>'), dibuja: (c) => dibujaNovenario(c, ctxDiario) },
   diario: { titulo: "Mi diario espiritual", sub: "Intenciones, gratitud, reflexiones y hábitos de oración", color: "#ffd45e", icono: ico('<path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M10 8h6M10 12h6M10 16h3"/>'), dibuja: (c) => dibujaDiario(c, ctxDiario) }
 };
 let ctxDiario = { hoy: () => new Date(), reflexionHoy: () => null };

@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.0 — 2026-11-24
+Nuevas guías en el menú: Velada al Niño Dios o Virgen patrona (para dirigir sin sacerdote) y Novenario por un difunto
+
 ## 1.7.0 — 2026-11-23
 Nuevas secciones en el menú: Oraciones católicas (Persignarse, Padrenuestro, Avemaría, Gloria, Credo, Ángel de la Guarda, Acto de contrición, protección, familia y enfermos) y Mi diario espiritual (intenciones, gratitud, reflexiones, propósitos, hábitos de oración e historial).
 
