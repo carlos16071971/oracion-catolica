@@ -94,6 +94,8 @@ ok(ORACIONES.grupos.flatMap((g) => g.items).every((o) => o.txt.length && o.txt.e
   ok(VELADA.pasos.every((p) => p.partes.every((x) => ["guia", "todos", "lector", "canto", "nota"].includes(x.r) && (typeof x.t === "string" ? x.t.length > 3 : x.t.n && x.t.v))), "Cada línea de la velada tiene rol válido y versión para Niño y Virgen");
   ok(VELADA.lecturas.n.length > 0 && VELADA.lecturas.v.length > 0, "La velada tiene lecturas para Niño y Virgen");
   ok(!/\{(?!imagen\}|pueblo\})\w+\}/.test(textos(VELADA)), "La velada solo usa las variables {imagen} y {pueblo}");
+  ok(VELADA.detalle.length === VELADA.programa.length && VELADA.detalle.length === VELADA.pasos.length && VELADA.detalle.every((d) => d.hacer.length && d.ejemplo && d.alegria && d.evitar.length), "Cada punto del programa tiene su ficha (qué hacer, ejemplo, alegría y qué evitar)");
+  ok(VELADA.claves.length >= 5, "La velada tiene sus claves para una noche feliz");
   ok(NOVENARIO.noches.length === 9 && NOVENARIO.noches.every((n) => n.t && n.cita && n.resumen && n.reflexion && n.oracion && n.peticion && n.obra), "El novenario tiene 9 noches completas");
   ok(new Set(NOVENARIO.noches.map((n) => n.cita)).size === 9, "Las 9 noches tienen lecturas distintas");
   ok(!/\{(?!nombre\}|lo\}|el\}|o\}|hermano\})\w+\}/.test(textos(NOVENARIO)), "El novenario solo usa variables conocidas");

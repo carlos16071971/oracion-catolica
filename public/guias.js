@@ -97,6 +97,7 @@ export function dibujaVelada(c) {
   let modo = LS.get("velada_modo") === "v" ? "v" : "n";
   const datos = { imagen: LS.get("velada_imagen") || "", pueblo: LS.get("velada_pueblo") || "" };
   let vivos = [];
+  let pasoAbrir = -1;
 
   const defImagen = () => (modo === "n" ? "Niño Dios" : "María");
   const sub = (t) => {
@@ -174,13 +175,74 @@ export function dibujaVelada(c) {
     panel.appendChild(el("h3", "grupo-tit", "Lista de preparación (marca lo que ya tienes)"));
     checklist(VELADA.preparacion, "velada_chk", panel);
 
-    const prog = el("section", "card");
+    // Programa: cada punto se despliega con su ficha para no equivocarse
+    const claves = el("section", "card card-intro");
+    claves.appendChild(el("h4", "paso-etq", "Claves para una velada feliz y agradecida"));
+    claves.appendChild(listaPuntos(VELADA.claves));
+    panel.appendChild(claves);
+
     const total = VELADA.programa.reduce((a, [, m]) => a + m, 0);
-    prog.appendChild(el("h4", "paso-etq", `Programa de la velada · unos ${total} minutos`));
-    const ol = el("ol", "programa");
-    VELADA.programa.forEach(([n, m]) => { const li = el("li"); li.append(el("span", "pr-n", n), el("span", "pr-m", `${m} min`)); ol.appendChild(li); });
-    prog.appendChild(ol);
-    panel.appendChild(prog);
+    const cab = el("section", "card cfg");
+    cab.appendChild(el("h4", "paso-etq", `Programa de la velada · unos ${total} minutos`));
+    cab.appendChild(el("label", "form-etq", "¿A qué hora empieza?"));
+    const hora = el("input", "campo-txt"); hora.type = "time"; hora.value = LS.get("velada_hora") || "19:00";
+    const fin = el("p", "cfg-pista");
+    cab.append(hora, fin, el("p", "cfg-pista", "Toca cada punto para ver qué hacer, un ejemplo de lo que puedes decir, cómo hacerlo con alegría y qué evitar."));
+    const acc = el("div", "acciones");
+    const abrir = el("button", "mini", "Abrir todos"); abrir.type = "button";
+    const cerrar = el("button", "mini", "Cerrar todos"); cerrar.type = "button";
+    acc.append(abrir, cerrar);
+    cab.appendChild(acc);
+    panel.appendChild(cab);
+
+    const lista = el("div", "grupo");
+    const horas = [];
+    const pintaHoras = () => {
+      const m = /^(\d{2}):(\d{2})$/.exec(hora.value || "");
+      let t = m ? +m[1] * 60 + +m[2] : null;
+      const fmt = (x) => `${String(Math.floor(x / 60) % 24).padStart(2, "0")}:${String(x % 60).padStart(2, "0")}`;
+      VELADA.programa.forEach(([, min], i) => { horas[i].textContent = t == null ? `${min} min` : `${fmt(t)} · ${min} min`; if (t != null) t += min; });
+      fin.textContent = t == null ? "" : `Terminaría hacia las ${fmt(t)}.`;
+    };
+    VELADA.programa.forEach(([nombre, min], i) => {
+      const f = VELADA.detalle[i];
+      const d = el("details", "card acordeon");
+      d.id = `prog-${i}`;
+      const sm = el("summary");
+      const tit = el("span", "acc-tit");
+      const pre = el("small", "acc-pre", `${min} min`);
+      horas.push(pre);
+      tit.append(pre, document.createTextNode(nombre));
+      sm.append(el("span", "num", String(i + 1)), tit, chevron());
+      d.appendChild(sm);
+      const cu = el("div", "acc-cu acc-cu-ancho ficha");
+      const bloque = (etq, cls, items, esLista) => {
+        const b = el("div", "ficha-b " + cls);
+        b.appendChild(el("h5", "ficha-etq", etq));
+        if (esLista) {
+          const ul = el("ul", "lista-pts");
+          for (const t of items) { const li = el("li"); li._raw = t; vivos.push(li); ul.appendChild(li); }
+          b.appendChild(ul);
+        } else {
+          const p = el("p", "ficha-tx"); p._raw = items; vivos.push(p); b.appendChild(p);
+        }
+        cu.appendChild(b);
+      };
+      bloque("Qué hacer", "f-hacer", f.hacer, true);
+      bloque("Ejemplo para decir o hacer", "f-ejemplo", f.ejemplo, false);
+      bloque("Para que sea una noche feliz", "f-alegria", f.alegria, false);
+      bloque("Evita", "f-evitar", f.evitar, true);
+      const ir = el("button", "mini", "Ver el guion de este paso"); ir.type = "button";
+      ir.addEventListener("click", () => { pasoAbrir = i; bar.barra.querySelector('[data-id="guion"]').click(); });
+      cu.appendChild(el("div", "acciones")).appendChild(ir);
+      d.appendChild(cu);
+      lista.appendChild(d);
+    });
+    panel.appendChild(lista);
+    pintaHoras();
+    for (const ev of ["input", "change"]) hora.addEventListener(ev, () => { LS.set("velada_hora", hora.value); pintaHoras(); });
+    abrir.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = true)));
+    cerrar.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = false)));
   }
 
   // ---------- Guion ----------
@@ -214,6 +276,11 @@ export function dibujaVelada(c) {
     panel.appendChild(lista);
     abrir.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = true)));
     cerrar.addEventListener("click", () => lista.querySelectorAll("details").forEach((x) => (x.open = false)));
+    if (pasoAbrir >= 0) {
+      const d = lista.children[pasoAbrir];
+      pasoAbrir = -1;
+      if (d) { d.open = true; requestAnimationFrame(() => d.scrollIntoView({ block: "start" })); }
+    }
   }
 
   // ---------- Recursos ----------

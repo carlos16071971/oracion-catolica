@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.1 — 2026-11-24
+Velada: cada punto del programa ahora se despliega con qué hacer, un ejemplo real, cómo lograr una noche feliz y agradecida, y qué evitar; con hora de cada momento
+
 ## 1.8.0 — 2026-11-24
 Nuevas guías en el menú: Velada al Niño Dios o Virgen patrona (para dirigir sin sacerdote) y Novenario por un difunto
 

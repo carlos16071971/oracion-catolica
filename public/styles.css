@@ -414,3 +414,15 @@ body[data-periodo="noche"] .dos-tit.no { color: #ff8f84; }
 .programa li::before { content: counter(p); flex: none; width: 22px; font: 800 .8rem var(--sans); color: var(--refl-acento); }
 .pr-n { flex: 1; font-family: var(--serif); font-size: .98rem; line-height: 1.35; }
 .pr-m { flex: none; font: 700 .76rem var(--sans); opacity: .7; }
+
+.ficha { display: flex; flex-direction: column; gap: 12px; }
+.ficha-b { padding: 10px 12px; border-radius: 14px; background: color-mix(in srgb, var(--refl-acento) 8%, transparent); }
+.ficha-etq { font: 800 .68rem var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--refl-acento); margin-bottom: 5px; }
+.ficha-tx { font-family: var(--serif); font-size: 1rem; line-height: 1.55; }
+.f-ejemplo { border-left: 4px solid var(--refl-acento); font-style: italic; }
+.f-alegria { background: color-mix(in srgb, #ffb02e 20%, transparent); }
+.f-alegria .ficha-etq { color: #a15c00; }
+body[data-periodo="noche"] .f-alegria .ficha-etq { color: var(--oro); }
+.f-evitar .ficha-etq { color: #c0392b; }
+body[data-periodo="noche"] .f-evitar .ficha-etq { color: #ff8f84; }
+.cfg input[type=time] { max-width: 180px; }

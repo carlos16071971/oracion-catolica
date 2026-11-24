@@ -101,6 +101,161 @@ export const VELADA = {
     ["Avisos y agradecimientos", 2],
     ["Bendición, despedida y canto final", 5]
   ],
+  // Una ficha por cada punto del programa (mismo orden que `programa` y `pasos`).
+  // hacer = qué hacer exactamente · ejemplo = lo que se puede decir/hacer, tal cual · alegria = toque para que sea una noche feliz y agradecida · evitar = errores frecuentes
+  claves: [
+    "Llega temprano y empieza puntual: la gente lo agradece y se siente respetada.",
+    "Sonríe y habla despacio. Si tú estás alegre y tranquila, la velada sale alegre y tranquila.",
+    "Que participen todos: niños llevando velas y flores, jóvenes leyendo, mayores sentados adelante.",
+    "Da las gracias muchas veces y por su nombre: a los priostes, cantores, lectores y a quienes vinieron.",
+    "Termina con alegría: un canto vivo, un aplauso de gratitud y una despedida cariñosa en la puerta."
+  ],
+  detalle: [
+    { // 1
+      hacer: [
+        "Llega 40 minutos antes: revisa la imagen, las velas, el sonido y las sillas.",
+        "Recibe a la gente en la puerta con una sonrisa y saluda por su nombre a los mayores.",
+        "Cuando la mayoría esté sentada, haz una señal a los cantores y empiecen.",
+        "Al terminar el canto, da la bienvenida en una o dos frases."
+      ],
+      ejemplo: { n: "«¡Qué alegría verlos! Gracias por venir esta noche a {pueblo}. Hoy venimos a dar gracias, a cantar y a estar juntos delante de nuestro {imagen}.»", v: "«¡Qué alegría verlos! Gracias por venir esta noche a {pueblo}. Hoy venimos a dar gracias, a cantar y a estar juntos delante de nuestra Virgen {imagen}.»" },
+      alegria: "Pide a los niños que entreguen una flor o una velita a cada persona que llega. Que nadie se sienta ignorado.",
+      evitar: ["Esperar más de 10 minutos a que llegue todo el mundo.", "Alargar la bienvenida.", "Empezar sin probar el micrófono."]
+    },
+    { // 2
+      hacer: [
+        "Invita a ponerse de pie con un gesto de la mano.",
+        "Haz la señal de la cruz despacio, junto con la gente.",
+        "Di el saludo y espera la respuesta antes de seguir."
+      ],
+      ejemplo: "«Pónganse de pie, por favor. En el nombre del Padre, y del Hijo, y del Espíritu Santo.» (esperas el Amén) «Bendito sea Dios, que nos ha reunido en su amor.»",
+      alegria: "Mira a la gente al saludar y sonríe: la primera impresión marca el ambiente de toda la noche.",
+      evitar: ["Decir «El Señor esté con ustedes»: es del sacerdote o del diácono.", "Ir tan rápido que nadie alcance a responder."]
+    },
+    { // 3
+      hacer: [
+        "Lee la introducción del guion o dila con tus palabras, en 3 minutos como máximo.",
+        "Añade algo propio de tu comunidad: desde cuándo se celebra la fiesta o quién cuidó la imagen todos estos años.",
+        "Anuncia que esta noche es de gratitud."
+      ],
+      ejemplo: { n: "«Hace muchos años que las familias de {pueblo} se reúnen cada diciembre ante el Niño Dios. Gracias a quienes cuidaron esta imagen, a los priostes y a quienes vinieron hoy aunque estén cansados. Esta noche es una noche de gratitud.»", v: "«Hace muchos años que las familias de {pueblo} se reúnen cada año ante nuestra Madre. Gracias a quienes cuidaron esta imagen, a los priostes y a quienes vinieron hoy aunque estén cansados. Esta noche es una noche de gratitud.»" },
+      alegria: "Nombra con cariño a los priostes, a los músicos y a los más pequeños: que todos se sientan parte de la fiesta.",
+      evitar: ["Hablar de problemas o polémicas del pueblo.", "Convertirla en un sermón."]
+    },
+    { // 4
+      hacer: [
+        "Invita al silencio y cuenta mentalmente hasta 10.",
+        "Lee las tres invocaciones despacio y deja que todos respondan.",
+        "Termina con la súplica de misericordia."
+      ],
+      ejemplo: "«Por un momento pensemos a quién necesitamos pedir perdón esta noche, y a quién queremos perdonar.» (silencio) «Tú, que viniste a buscar a los que estaban perdidos: Señor, ten piedad.»",
+      alegria: "Habla con ternura: el perdón nos libera para estar contentos y en paz con los demás.",
+      evitar: ["Regañar o mencionar pecados concretos.", "Decir «yo los absuelvo»: eso solo lo hace el sacerdote.", "Alargar el silencio más de 15 segundos."]
+    },
+    { // 5
+      hacer: [
+        "Di «Oremos» y deja un instante de silencio.",
+        "Lee la oración con calma, las manos juntas y la mirada en alto.",
+        "Espera el Amén de la gente."
+      ],
+      ejemplo: "«Oremos.» (silencio) [Lee la oración inicial del guion.] «Por Jesucristo, nuestro Señor.»",
+      alegria: "Esta oración marca el tono espiritual de la noche: léela como quien habla con alguien a quien quiere.",
+      evitar: ["Leer con la cabeza pegada al papel.", "Cambiar palabras de la oración.", "Apurarte."]
+    },
+    { // 6
+      hacer: [
+        "Ten la lectura marcada en la Biblia y ensayada con el lector desde antes.",
+        "Pide que se sienten para escuchar.",
+        "Después de la lectura, guarda un minuto de silencio.",
+        "Si no hay cantor para el salmo, recen la respuesta entre dos grupos."
+      ],
+      ejemplo: { n: "«Escuchemos con atención lo que Dios nos dice esta noche.» (Lectura: Lucas 2,1-14) … «Palabra del Señor.» (Gloria a ti, Señor Jesús.) (un minuto de silencio)", v: "«Escuchemos con atención lo que Dios nos dice esta noche.» (Lectura: Lucas 1,26-38) … «Palabra del Señor.» (Gloria a ti, Señor Jesús.) (un minuto de silencio)" },
+      alegria: "Pide a un niño o a una niña que lleve la Biblia hasta el lector, como en procesión: la Palabra es el centro de la fiesta.",
+      evitar: ["Cambiar la lectura por otro texto que no sea de la Biblia.", "Leer sin pausas.", "Empezar a hablar enseguida, sin silencio."]
+    },
+    { // 7
+      hacer: [
+        "Usa el modelo del guion o adáptalo con un recuerdo real de la comunidad.",
+        "Habla cinco minutos como máximo.",
+        "Cierra con la pregunta y un minuto de silencio."
+      ],
+      ejemplo: { n: "(Cambia el recuerdo por uno tuyo.) «Cuando era pequeña, mi familia me llevaba a ver al Niño Dios y me decían que le contara mis cosas. Él no se asusta de lo pequeño. Por eso hoy le preguntamos: ¿qué pesebre puedo preparar esta semana para que Jesús nazca en mi casa?»", v: "(Cambia el recuerdo por uno tuyo.) «Cuando era pequeña, mi mamá me enseñó a saludar a la Virgen al pasar frente a su imagen. Ella nunca nos dejó solos. Por eso hoy le preguntamos: ¿qué me pide Dios y cómo puedo decirle sí como María?»" },
+      alegria: "Una anécdota sencilla y una sonrisa valen más que una explicación larga. Puedes preguntar: «¿Quién recuerda su primera fiesta aquí?» y dejar que dos o tres personas cuenten.",
+      evitar: ["Hacer una homilía larga.", "Corregir o criticar a la gente.", "Mencionar temas políticos o asuntos privados de alguien presente."]
+    },
+    { // 8
+      hacer: [
+        "Prepara antes a un lector joven.",
+        "Explica a todos la respuesta antes de empezar.",
+        "Deja un momento para intenciones libres; si nadie habla, di tú una."
+      ],
+      ejemplo: "«Vamos a responder todos juntos: «Escúchanos, Señor».» … «Ahora, quien quiera, puede decir en voz alta por quién o por qué quiere rezar.» (silencio) «Y damos gracias por todo lo bueno que recibimos este año.»",
+      alegria: "Incluye una petición de acción de gracias por lo bueno del año y por las familias presentes: la velada será de gratitud y no solo de pedir.",
+      evitar: ["Hacer peticiones largas o con regaños.", "Nombrar enfermos sin permiso de la familia.", "Olvidar la respuesta de la gente."]
+    },
+    { // 9
+      hacer: [
+        "Invita a rezarlo juntos y empieza tú.",
+        "Dilo despacio, al ritmo de los más pequeños y de los mayores.",
+        "Termina en «líbranos del mal»."
+      ],
+      ejemplo: "«Como hijos de un mismo Padre, rezamos juntos las palabras que Jesús nos enseñó.» (Padre nuestro…)",
+      alegria: "Si en tu comunidad se acostumbra, invita a darse la mano con los de al lado: es un gesto de familia.",
+      evitar: ["Añadir frases propias o el embolismo de la Misa.", "Decirlo muy rápido."]
+    },
+    { // 10
+      hacer: [
+        "Reparte las decenas entre cinco personas, avisadas con anticipación.",
+        "Anuncia cada misterio con una frase corta y deja un instante de silencio.",
+        "Si el tiempo apremia, usa las letanías en lugar del Rosario."
+      ],
+      ejemplo: { n: "«Primer misterio gozoso: la Anunciación. Pensemos cómo Dios entra con sencillez en nuestra vida. Rezamos un Padrenuestro, diez Avemarías y un Gloria.»", v: "«Primer misterio gozoso: la Anunciación. Pensemos en el sí de María y en nuestros propios síes. Rezamos un Padrenuestro, diez Avemarías y un Gloria.»" },
+      alegria: "Intercala un canto breve entre las decenas: la oración se siente viva y nadie se cansa.",
+      evitar: ["Que cada uno rece a un ritmo distinto.", "Perder la cuenta: pide a una ayudante que lleve el rosario.", "Olvidar el Gloria al final de la decena."]
+    },
+    { // 11
+      hacer: [
+        "Explica el orden antes de empezar.",
+        "Primero pasan los niños y los mayores; luego las familias.",
+        "Una persona de apoyo recibe las flores y las velas.",
+        "Los cantores mantienen un canto suave; si hay mucha gente, hagan dos filas."
+      ],
+      ejemplo: { n: "«Vamos a acercarnos en orden y sin apuro. Cada uno deja su flor o su vela ante nuestro {imagen} y le dice en su corazón: gracias.»", v: "«Vamos a acercarnos en orden y sin apuro. Cada uno deja su flor o su vela ante nuestra Virgen {imagen} y le dice en su corazón: gracias.»" },
+      alegria: "Invita a cada familia a decir «gracias» en voz baja al dejar su ofrenda, y a una abuela o a un niño a abrir la fila. Es el momento más tierno de la velada.",
+      evitar: ["Empujones: ayuda a los mayores y a las personas con dificultad para caminar.", "Llenar la imagen de velas encendidas sin cuidar el fuego.", "Bendecir las ofrendas con fórmulas del ritual."]
+    },
+    { // 12
+      hacer: [
+        "Lee la oración con calma; los priostes pueden estar de pie junto a la imagen.",
+        "Invita a todos a repetir «Gracias, Señor».",
+        "Cierra con el Amén de todos."
+      ],
+      ejemplo: "«Hagamos juntos un momento de gratitud: gracias por la familia, por la salud, por el trabajo, por esta fiesta. Y todos repetimos: Gracias, Señor.» (Gracias, Señor.)",
+      alegria: "Pide que quien quiera diga en voz alta una sola frase de gracias: «Gracias por mi hijo», «Gracias por la cosecha». Es muy emotivo y no toma más de dos minutos.",
+      evitar: ["Alargarla con pedidos nuevos.", "Improvisar una oración que nadie pueda seguir."]
+    },
+    { // 13
+      hacer: [
+        "Lleva escrita la lista de personas a agradecer, para no olvidar a nadie.",
+        "Anuncia la hora de la Santa Misa y las próximas actividades de la fiesta.",
+        "Hazlo en menos de dos minutos."
+      ],
+      ejemplo: "«Gracias a los priostes, a los cantores, a los lectores, a quienes cocinaron y adornaron este lugar. Mañana la Santa Misa será a las… en la iglesia. Los esperamos.»",
+      alegria: "Pide un aplauso para quienes trabajaron: los aplausos de gratitud son parte de la alegría de la fiesta.",
+      evitar: ["Olvidar a alguien importante: revisa tu lista antes.", "Dar avisos largos o que no tengan que ver con la fiesta.", "Pedir dinero con insistencia."]
+    },
+    { // 14
+      hacer: [
+        "Pide ponerse de pie.",
+        "Di la bendición para laicos haciéndote tú la señal de la cruz.",
+        "Despide con «Bendigamos al Señor» y empieza el canto final.",
+        "Quédate en la puerta para despedir a la gente."
+      ],
+      ejemplo: "«El Señor nos bendiga, nos guarde de todo mal y nos lleve a la vida eterna.» (Amén.) «Bendigamos al Señor.» (Demos gracias a Dios.) «¡Que Dios les pague por venir! ¡Felices noches!»",
+      alegria: "Termina con un canto alegre, quizá con palmas, y despide a cada persona en la puerta. Si los priostes lo organizan, entreguen un detalle sencillo: una estampa, un caramelo para los niños, un agüita.",
+      evitar: ["Decir «los bendigo» o hacer la cruz sobre la gente.", "Cortar el canto final.", "Irte primero: el último en salir es quien dirigió."]
+    }
+  ],
   pasos: [
     {
       n: "Canto de entrada y bienvenida", min: 5,
