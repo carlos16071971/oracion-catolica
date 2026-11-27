@@ -77,7 +77,7 @@ export function contenido(d, que) {
   const dia = diaDelAnio(d);
   const P = noche ? NO : MA;
   const esp = especialDe(d);
-  const variante = dia % 5; // matiz del cielo: 5 variantes
+  const variante = mod(dia + Math.floor(dia / FIGURAS.length), 5); // matiz del cielo: 5 variantes (el desfase evita que quede atado a la figura)
   const base = {
     etiqueta: noche ? "Oración de la noche" : "Oración de la mañana",
     seed: dia * 2 + (noche ? 1 : 0),
@@ -112,7 +112,7 @@ export function contenido(d, que) {
     titulo: tema[0],
     figuraId: fig.id,
     figuraNombre: fig.nombre,
-    motivo: mod(dia + Math.floor(dia / FIGURAS.length) + (noche ? 3 : 0), 8), // el desfase evita repetir fondo cuando FIGURAS no es coprimo con 8
+    motivo: mod(dia + (FIGURAS.length % 8 === 0 ? Math.floor(dia / FIGURAS.length) : 0) + (noche ? 3 : 0), 8), // el desfase solo hace falta cuando FIGURAS no es coprimo con 8
     parrafos: [
       P.APERTURAS[mod(dia, P.APERTURAS.length)] + " " + (noche ? fig.n : fig.m),
       tema[1],

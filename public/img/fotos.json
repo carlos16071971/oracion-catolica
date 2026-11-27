@@ -40,5 +40,13 @@
   "rosario": {
     "src": "img/rosario.jpg",
     "pos": "50% 25%"
+  },
+  "francisco": {
+    "src": "img/francisco.jpg",
+    "pos": "46% 20%"
+  },
+  "josegregorio": {
+    "src": "img/josegregorio.jpg",
+    "pos": "50% 6%"
   }
 }

@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.6 — 2026-11-27
+Nuevas imágenes: San Francisco de Asís y San José Gregorio Hernández
+
 ## 1.8.5 — 2026-11-27
 Pantalla inicial: imagen más pequeña y nítida, y se quita el texto «Mañana» junto a la hora
 
