@@ -1,5 +1,5 @@
 {
-  "version": "1.8.4",
+  "version": "1.8.5",
   "fecha": "2026-11-27",
-  "mensaje": "Nueva imagen de portada en la pantalla inicial: Oración Católica, ora, vive y confía (se conservan todos los textos de bienvenida)"
+  "mensaje": "Pantalla inicial: imagen más pequeña y nítida, y se quita el texto «Mañana» junto a la hora"
 }

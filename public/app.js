@@ -76,8 +76,7 @@ function render(forzar = false) {
   document.body.dataset.periodo = est.periodo;
   const f = fmtFecha.format(d);
   $("fechaTxt").textContent = f.charAt(0).toUpperCase() + f.slice(1);
-  $("momentoTxt").textContent = est.que === "noche" ? "Noche" : "Mañana";
-  $("momentoTxt").setAttribute("aria-label", est.que === "noche" ? "Oración de la noche" : "Oración de la mañana");
+  $("momentoTxt").textContent = est.que === "noche" ? "Oración de la noche" : "Oración de la mañana";
   pintaHora(d);
 
   // aviso de espera entre las 12:00 y las 20:00

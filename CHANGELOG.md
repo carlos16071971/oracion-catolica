@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.5 — 2026-11-27
+Pantalla inicial: imagen más pequeña y nítida, y se quita el texto «Mañana» junto a la hora
+
 ## 1.8.4 — 2026-11-27
 Nueva imagen de portada en la pantalla inicial: Oración Católica, ora, vive y confía (se conservan todos los textos de bienvenida)
 
