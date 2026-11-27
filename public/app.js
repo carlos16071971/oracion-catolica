@@ -60,6 +60,13 @@ async function pintarArte(contenedor, id, opts) {
 let claveActual = "";
 const fmtFecha = new Intl.DateTimeFormat("es", { weekday: "long", day: "numeric", month: "long" });
 
+const pad2 = (n) => String(n).padStart(2, "0");
+function pintaHora(d = ahora()) {
+  const t = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+  const e = $("horaTxt");
+  if (e.textContent !== t) { e.textContent = t; e.setAttribute("datetime", t); }
+}
+
 function render(forzar = false) {
   const d = ahora();
   const est = estado(d);
@@ -69,7 +76,9 @@ function render(forzar = false) {
   document.body.dataset.periodo = est.periodo;
   const f = fmtFecha.format(d);
   $("fechaTxt").textContent = f.charAt(0).toUpperCase() + f.slice(1);
-  $("momentoTxt").textContent = est.que === "noche" ? "Oración de la noche" : "Oración de la mañana";
+  $("momentoTxt").textContent = est.que === "noche" ? "Noche" : "Mañana";
+  $("momentoTxt").setAttribute("aria-label", est.que === "noche" ? "Oración de la noche" : "Oración de la mañana");
+  pintaHora(d);
 
   // aviso de espera entre las 12:00 y las 20:00
   const av = $("aviso");
@@ -137,6 +146,7 @@ $("btnEntrar").addEventListener("click", entrar);
 
 mostrarBienvenida();
 setInterval(() => { if (!$("app").hidden) render(); }, 20000);
+setInterval(() => { if (!$("app").hidden) pintaHora(); }, 5000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("app").hidden) render(); });
 
 // ---- Service worker (funciona sin conexión) ----

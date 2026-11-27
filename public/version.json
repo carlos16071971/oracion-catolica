@@ -1,5 +1,5 @@
 {
-  "version": "1.8.2",
-  "fecha": "2026-11-24",
-  "mensaje": "Los desplegables se abren de uno en uno: al abrir uno, los demás se cierran"
+  "version": "1.8.3",
+  "fecha": "2026-11-27",
+  "mensaje": "Fecha y hora bien visibles (reloj grande y fecha completa) y botón de menú con tres líneas y la palabra Menú, como llamado a la acción"
 }

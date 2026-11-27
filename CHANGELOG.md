@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.3 — 2026-11-27
+Fecha y hora bien visibles (reloj grande y fecha completa) y botón de menú con tres líneas y la palabra Menú, como llamado a la acción
+
 ## 1.8.2 — 2026-11-24
 Los desplegables se abren de uno en uno: al abrir uno, los demás se cierran
 
