@@ -120,7 +120,15 @@ function mostrarBienvenida() {
   $("bienTitulo").textContent = b.titulo;
   $("bienFrase").textContent = b.frase;
   $("despedidaTxt").textContent = b.despedida;
-  pintarArte($("arteBien"), c.figuraId, { periodo: est.que, seed: c.seed + 500, motivo: (c.motivo + 3) % 8, variante: c.variante });
+  // Imagen de portada (img/portada.jpg). Solo si no se puede cargar (sin conexión y sin copia guardada) se usa el arte de la figura del día.
+  const cont = $("arteBien");
+  const portada = new Image();
+  portada.className = "portada";
+  portada.alt = "Oración Católica: ora, vive y confía";
+  portada.decoding = "async";
+  portada.onload = () => cont.replaceChildren(portada);
+  portada.onerror = () => pintarArte(cont, c.figuraId, { periodo: est.que, seed: c.seed + 500, motivo: (c.motivo + 3) % 8, variante: c.variante });
+  portada.src = "img/portada.jpg";
 }
 function entrar() {
   render(true);

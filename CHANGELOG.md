@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.8.4 — 2026-11-27
+Nueva imagen de portada en la pantalla inicial: Oración Católica, ora, vive y confía (se conservan todos los textos de bienvenida)
+
 ## 1.8.3 — 2026-11-27
 Fecha y hora bien visibles (reloj grande y fecha completa) y botón de menú con tres líneas y la palabra Menú, como llamado a la acción
 
