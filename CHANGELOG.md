@@ -1,5 +1,8 @@
 # Historial de versiones
 
+## 1.9.0 — 2026-11-27
+Guía para laicos sin sacerdote, Rosario y Vía Crucis guiados, y letra grande para leer en voz alta
+
 ## 1.8.6 — 2026-11-27
 Nuevas imágenes: San Francisco de Asís y San José Gregorio Hernández
 

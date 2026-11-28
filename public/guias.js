@@ -2,23 +2,23 @@
 // Los datos personales (nombre del difunto, de la imagen, del pueblo, progreso) se guardan solo en este dispositivo.
 import { VELADA, NOVENARIO } from "./data/guias.js";
 
-const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-const LS = {
+export const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+export const LS = {
   get: (k) => { try { return localStorage.getItem(k); } catch (_) { return null; } },
   set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} },
   del: (k) => { try { localStorage.removeItem(k); } catch (_) {} }
 };
-const leerJSON = (k, def) => { try { const v = JSON.parse(LS.get(k)); return v == null ? def : v; } catch (_) { return def; } };
-function chevron() {
+export const leerJSON = (k, def) => { try { const v = JSON.parse(LS.get(k)); return v == null ? def : v; } catch (_) { return def; } };
+export function chevron() {
   const s = el("span", "chev");
   s.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
   return s;
 }
 
-const ROLES = { guia: "Guía", todos: "Todos", lector: "Lector", canto: "Canto", nota: "Nota" };
+export const ROLES = { guia: "Guía", todos: "Todos", lector: "Lector", canto: "Canto", nota: "Nota" };
 
 // Pestañas como las de Salmos (filtros). Devuelve { barra, panel, ir }.
-function pestanas(lista, inicial, pintar) {
+export function pestanas(lista, inicial, pintar) {
   const barra = el("div", "filtros");
   barra.setAttribute("role", "tablist");
   const panel = el("div", "gpanel");
@@ -36,7 +36,7 @@ function pestanas(lista, inicial, pintar) {
   return { barra, panel, ir: () => ir(inicial) };
 }
 
-function botonCopiar(obtener, etq = "Copiar") {
+export function botonCopiar(obtener, etq = "Copiar") {
   const b = el("button", "mini", etq);
   b.type = "button";
   b.addEventListener("click", async () => {
@@ -47,7 +47,7 @@ function botonCopiar(obtener, etq = "Copiar") {
 }
 
 // Línea con rol (Guía / Todos / Lector / Canto / Nota). Su texto se actualiza con los datos de la persona.
-function linea(parte, resolver, vivos) {
+export function linea(parte, resolver, vivos) {
   const d = el("div", `linea rol-${parte.r}`);
   if (parte.r !== "nota") d.appendChild(el("span", "rol", ROLES[parte.r]));
   const p = el("p", "linea-tx");
@@ -57,7 +57,7 @@ function linea(parte, resolver, vivos) {
   return d;
 }
 
-function checklist(grupos, clave, contenedor) {
+export function checklist(grupos, clave, contenedor) {
   const hechos = new Set(leerJSON(clave, []));
   const guardar = () => LS.set(clave, JSON.stringify([...hechos]));
   grupos.forEach((g, gi) => {
@@ -84,7 +84,7 @@ function checklist(grupos, clave, contenedor) {
   });
 }
 
-function listaPuntos(items, cls) {
+export function listaPuntos(items, cls) {
   const ul = el("ul", "lista-pts" + (cls ? " " + cls : ""));
   for (const t of items) ul.appendChild(el("li", null, t));
   return ul;

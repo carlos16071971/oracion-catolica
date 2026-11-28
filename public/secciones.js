@@ -2,6 +2,8 @@
 import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_NOTA, SALMOS_TEMAS, NOVENA, ORACIONES } from "./data/devocionario.js";
 import { dibujaDiario } from "./diario.js";
 import { dibujaVelada, dibujaNovenario } from "./guias.js";
+import { dibujaAusencia } from "./ausencia.js";
+import { dibujaRosario } from "./rosario.js";
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
@@ -18,7 +20,9 @@ const SECCIONES = {
   mandamientos: { titulo: "Mandamientos", sub: "Los diez mandamientos de la Ley de Dios", color: "#ffb02e", icono: ico('<rect x="4" y="3" width="7" height="18" rx="3"/><rect x="13" y="3" width="7" height="18" rx="3"/><path d="M7.5 8v.01M16.5 8v.01M7.5 12v.01M16.5 12v.01"/>'), dibuja: dibujaMandamientos },
   sacramentos: { titulo: "Sacramentos", sub: "Los siete signos de la gracia de Dios", color: "#ff6b8b", icono: ico('<path d="M7 4h10l-1 6a4 4 0 0 1-8 0z"/><path d="M12 14v5M8.5 20h7"/>'), dibuja: dibujaSacramentos },
   salmos: { titulo: "Salmos", sub: "Oraciones del pueblo de Dios para cada momento", color: "#46c2ff", icono: ico('<path d="M5 20V5a2 2 0 0 1 2-2h11v15H7a2 2 0 0 0-2 2z"/><path d="M5 20a2 2 0 0 0 2 2h11"/><path d="M10 8h5"/>'), dibuja: dibujaSalmos },
+  rosario: { titulo: "Rosario y Vía Crucis", sub: "Paso a paso, con contador de Avemarías", color: "#ff8fb3", icono: ico('<circle cx="12" cy="5" r="1.6"/><circle cx="7" cy="8" r="1.6"/><circle cx="17" cy="8" r="1.6"/><circle cx="5.5" cy="13.5" r="1.6"/><circle cx="18.5" cy="13.5" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/><path d="M12 20.5v1.5"/>'), dibuja: (c) => dibujaRosario(c, { hoy: () => hoy() }) },
   novena: { titulo: "Novena al Niño Jesús", sub: "Nueve días de oración con el Divino Niño", color: "#b98cff", icono: ico('<path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.4 6-5.4-3.2L6.6 19.3l1.4-6L3.4 9.2l6.1-.6z"/>'), dibuja: dibujaNovena },
+  ausencia: { titulo: "Sin sacerdote: guía para laicos", sub: "Palabra dominical, emergencias, velorio y enfermos", color: "#ffd45e", icono: ico('<path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M12 8v6M9 11h6"/>'), dibuja: (c) => dibujaAusencia(c, { hoy: () => hoy(), ir: (id) => abrirSeccion(id) }) },
   velada: { titulo: "Velada al Niño Dios o Virgen", sub: "Guía completa para dirigir una velada sin sacerdote", color: "#ff9a5c", icono: ico('<path d="M12 3c2 3 4 4.5 4 7.5a4 4 0 0 1-8 0C8 7.500 10 6 12 3z"/><path d="M9 21h6M12 15v6"/>'), dibuja: dibujaVelada },
   novenario: { titulo: "Novenario por un difunto", sub: "Las nueve noches de oración por un familiar", color: "#8fb8ff", icono: ico('<path d="M20 14.5A8 8 0 1 1 9.500 4a6.500 6.500 0 0 0 10.500 10.500z"/>'), dibuja: (c) => dibujaNovenario(c, ctxDiario) },
   diario: { titulo: "Mi diario espiritual", sub: "Intenciones, gratitud, reflexiones y hábitos de oración", color: "#ffd45e", icono: ico('<path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M10 8h6M10 12h6M10 16h3"/>'), dibuja: (c) => dibujaDiario(c, ctxDiario) }
@@ -87,6 +91,10 @@ export function iniciarSecciones(opts = {}) {
   ctxDiario = { hoy, reflexionHoy: opts.reflexionHoy || (() => null) };
   iniciarMenu();
   $("btnAtras").addEventListener("click", cerrarSeccion);
+  // Letra grande para leer en voz alta (se recuerda en este dispositivo)
+  const aplicaLetra = (on) => { $("seccion").classList.toggle("letra-grande", on); $("btnLetra").setAttribute("aria-pressed", on); };
+  aplicaLetra(LS.get("letra_grande") === "1");
+  $("btnLetra").addEventListener("click", () => { const on = !$("seccion").classList.contains("letra-grande"); LS.set("letra_grande", on ? "1" : "0"); aplicaLetra(on); });
   // Desplegables: solo uno abierto a la vez en cada pantalla (el evento "toggle" no sube, por eso se captura).
   $("seccionCuerpo").addEventListener("toggle", (e) => {
     const d = e.target;

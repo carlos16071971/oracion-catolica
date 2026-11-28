@@ -7,11 +7,47 @@ import * as NO from "../public/data/noche.js";
 import { TITULOS, FRASES } from "../public/data/bienvenida.js";
 import { ESPECIALES } from "../public/data/especiales.js";
 import { VELADA, NOVENARIO } from "../public/data/guias.js";
+import { AUSENCIA } from "../public/data/ausencia.js";
+import { MISTERIOS, VIACRUCIS, LETANIA } from "../public/data/rosario.js";
+import { domingoLiturgico } from "../public/ausencia.js";
 import { MANDAMIENTOS, SACRAMENTOS, SALMOS, SALMOS_TEMAS, NOVENA, ORACIONES } from "../public/data/devocionario.js";
 
 let fallos = 0;
 const ok = (c, msg) => { if (!c) { fallos++; console.error("✗", msg); } else console.log("✓", msg); };
 const mcd = (a, b) => (b ? mcd(b, a % b) : a);
+
+// 0) Guía para laicos, Rosario y Vía Crucis
+{
+  const ROLES_OK = new Set(["guia", "todos", "lector", "canto", "nota"]);
+  const TOK = new Set(["nombre", "el", "o", "lo", "hijo", "domingo", "lec1", "salmo", "lec2", "evangelio", "reflexion", "lectura"]);
+  const rutas = [["palabra", AUSENCIA.palabra.pasos], ["velorio", AUSENCIA.velorio.oracion], ["sepultura", AUSENCIA.velorio.sepultura], ["visita", AUSENCIA.enfermos.visita]];
+  let rolesMal = 0, tokMal = 0, vacios = 0;
+  const revisa = (partes) => { for (const x of partes) { if (!ROLES_OK.has(x.r)) rolesMal++; if (!x.t || !x.t.trim()) vacios++; for (const m of x.t.matchAll(/\{(\w+)\}/g)) if (!TOK.has(m[1])) tokMal++; } };
+  for (const [, lista] of rutas) for (const p of lista) { if (!p.n || !(p.min > 0)) vacios++; if (!p.comunion) revisa(p.partes); }
+  revisa(AUSENCIA.palabra.comunionSi.partes); revisa(AUSENCIA.palabra.comunionNo.partes); revisa(AUSENCIA.emergencias.moribundo.oraciones); revisa(AUSENCIA.emergencias.moribundo.alMorir);
+  ok(rolesMal === 0 && vacios === 0, "Guía para laicos: roles válidos y sin pasos vacíos");
+  ok(tokMal === 0, "Guía para laicos: solo variables conocidas");
+  ok(AUSENCIA.palabra.pasos.filter((p) => p.comunion).length === 1 && AUSENCIA.palabra.pasos.length >= 12, "Celebración de la Palabra: pasos completos y un solo punto de Comunión");
+  ok(AUSENCIA.emergencias.bautismo.pasos.length >= 6 && AUSENCIA.limites.puede.length >= 5 && AUSENCIA.limites.nopuede.length >= 5, "Emergencias y límites presentes");
+  ok(Object.keys(MISTERIOS).length === 4 && Object.values(MISTERIOS).every((m) => m.lista.length === 5 && m.lista.every((x) => x.length === 4 && x.every(Boolean))), "Rosario: 4 series de 5 misterios completos");
+  ok(VIACRUCIS.estaciones.length === 14 && VIACRUCIS.estaciones.every((e) => e[0] && e[1]), "Vía Crucis: 14 estaciones");
+  ok(LETANIA.maria.length >= 40, "Letanía lauretana presente");
+  // Calendario litúrgico: fechas conocidas
+  const ch = (f, txt, ciclo) => { const d = domingoLiturgico(new Date(f + "T12:00:00")); ok(d.nombre.includes(txt) && d.ciclo === ciclo, `Calendario ${f}: ${d.nombre} · ciclo ${d.ciclo} (esperado «${txt}», ${ciclo})`); };
+  ch("2026-11-29", "primer domingo de Adviento", "B");
+  ch("2026-04-05", "Pascua de la Resurrección", "A");
+  ch("2026-03-29", "Domingo de Ramos", "A");
+  ch("2026-05-24", "Pentecostés", "A");
+  ch("2026-11-22", "Rey del Universo", "A");
+  ch("2026-12-13", "tercer domingo de Adviento", "B");
+  ch("2026-03-15", "cuarto domingo de Cuaresma", "A");
+  ch("2026-05-31", "Santísima Trinidad", "A");
+  ch("2026-06-07", "10.º domingo del Tiempo Ordinario", "A");
+  ch("2026-02-08", "5.º domingo del Tiempo Ordinario", "A");
+  ch("2025-12-28", "Sagrada Familia", "A");
+  ch("2027-01-10", "Bautismo del Señor", "B");
+  ch("2026-11-15", "33.º domingo del Tiempo Ordinario", "A");
+}
 
 // 1) Tamaños de los conjuntos y que sean coprimos (garantiza que no se repita la combinación)
 const lens = { aperturas: MA.APERTURAS.length, figuras: FIGURAS.length, temas: MA.TEMAS.length, cierres: MA.CIERRES.length, propositos: MA.PROPOSITOS.length };

@@ -494,3 +494,43 @@ body[data-periodo="noche"] .f-evitar .ficha-etq { color: #ff8f84; }
   .bienvenida h1 { font-size: 1.5rem; }
   .bien-frase { font-size: .88rem; }
 }
+
+/* ---------- Sin sacerdote, Rosario y Vía Crucis (v1.9.0) ---------- */
+.btn-letra { margin-left: auto; font: 800 1rem var(--sans); background: rgba(20,12,60,.45); color: #fff; }
+.btn-letra[aria-pressed="true"] { background: var(--oro); color: #3a1b00; }
+.btn-llamar { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; margin-top: 4px; }
+.btn-llamar[hidden] { display: none; }
+.campo-area { resize: vertical; min-height: 84px; }
+.cfg a.mini { display: inline-flex; align-items: center; text-decoration: none; }
+.dom-res { font: 700 1.1rem var(--serif); line-height: 1.3; }
+.urgente { border-left-color: #e0574b; }
+.formula { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: color-mix(in srgb, var(--refl-acento) 12%, transparent); }
+.formula b { display: block; font: 800 .68rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--refl-acento); margin-bottom: 3px; }
+.formula p { font: 700 1.05rem/1.5 var(--serif); }
+.ficha-etq { font: 800 .68rem var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--refl-acento); margin: 12px 0 4px; }
+ol.lista-pts { padding-left: 1.4em; }
+
+.step { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 70px; }
+.sp-barra { display: flex; flex-direction: column; gap: 6px; }
+.sp-num { font: 800 .72rem var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--refl-acento); }
+.sp-prog { height: 6px; border-radius: 999px; background: color-mix(in srgb, var(--refl-acento) 20%, transparent); overflow: hidden; }
+.sp-prog span { display: block; height: 100%; background: var(--refl-acento); border-radius: 999px; transition: width .25s; }
+.sp-tit { font: 700 1.2rem/1.25 var(--serif); }
+.sp-cuerpo { display: flex; flex-direction: column; gap: 4px; min-height: 220px; }
+.sp-nav { display: flex; gap: 10px; justify-content: space-between; align-items: center; }
+.sp-nav .btn { flex: 1; }
+.sp-nav .mini { min-height: 48px; }
+.sp-nav .mini:disabled { opacity: .4; }
+.contador { margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.cont-num { font: 800 1.5rem var(--sans); color: var(--refl-acento); }
+.btn-contar { width: 100%; min-height: 72px; border-radius: 22px; border: 0; font: 800 1.1rem var(--sans); cursor: pointer; color: var(--num-tx); background: var(--refl-acento); }
+.btn-contar:active { transform: scale(.98); }
+.btn-contar.completo { background: #1f9d55; color: #fff; }
+.resp { font: 700 .9rem var(--sans); margin: 4px 0 8px; color: var(--refl-acento); }
+
+/* Letra grande para leer en voz alta */
+.letra-grande .linea-tx, .letra-grande .salmo-txt, .letra-grande .intro-txt, .letra-grande .chk-tx, .letra-grande .lista-pts,
+.letra-grande .roles dd, .letra-grande .ficha-tx, .letra-grande .item-txt, .letra-grande .formula p, .letra-grande .dom-res { font-size: 1.32rem; line-height: 1.6; }
+.letra-grande .rol-nota .linea-tx { font-size: 1rem; }
+.letra-grande .sp-tit { font-size: 1.5rem; }
+.letra-grande .acc-tit { font-size: 1.2rem; }
